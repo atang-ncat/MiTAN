@@ -1,0 +1,24 @@
+# NVIDIA Isaac ROS packages (cloned from NGC/GitHub, not our code)
+src/isaac_ros_common/
+src/isaac_ros_visual_slam/
+
+# TensorRT engines and large model assets
+isaac_ros_assets/
+*.plan
+*.onnx
+*.engine
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# ROS build artifacts
+build/
+install/
+log/
+
+# OS
+.DS_Store
+*.swp
+*~
