@@ -1,0 +1,51 @@
+# Custom dataset configuration for HybridNets training
+# Dataset: Roboflow-exported dataset with 6 detection classes + drivable area + lane lines
+
+# mean and std in RGB order (ImageNet defaults, suitable for pretrained backbones)
+mean: [0.485, 0.456, 0.406]
+std: [0.229, 0.224, 0.225]
+
+# Anchor configuration - will be auto-generated if need_autoanchor is true
+anchors_scales: '[2**0, 2**0.70, 2**1.32]'
+anchors_ratios: '[(0.62, 1.58), (1.0, 1.0), (1.58, 0.62)]'
+
+# Object detection classes (6 classes)
+obj_list: ['person', 'robot', 'traffic_light_green', 'traffic_light_off', 'traffic_light_red']
+obj_combine: []  # no class combining
+
+traffic_light_color: false
+
+# Segmentation classes
+seg_list: ['road', 'lane']
+seg_multilabel: false
+
+dataset:
+  dataroot: ../datasets/imgs
+  labelroot: ../datasets/det_annot
+  segroot:
+    - ../datasets/da_seg_annot
+    - ../datasets/ll_seg_annot
+  test_set: test
+  train_set: train
+  org_img_size:
+    - 480   # height
+    - 640   # width
+  fliplr: 0.5
+  flipud: 0.0
+  hsv_h: 0.015
+  hsv_s: 0.7
+  hsv_v: 0.4
+  rot_factor: 10
+  scale_factor: 0.25
+  shear: 0.0
+  translate: 0.1
+  mosaic: 1.0  # recommended at 1.0
+  mixup: 0.0  # recommended at 0.1
+
+model:
+  image_size:
+    - 640
+    - 384
+
+need_autoanchor: true
+pin_memory: true

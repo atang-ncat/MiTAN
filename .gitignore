@@ -5,8 +5,16 @@ src/isaac_ros_visual_slam/
 # TensorRT engines and large model assets
 isaac_ros_assets/
 *.plan
-*.onnx
 *.engine
+
+# Large PyTorch checkpoints (not needed for deployment)
+*.pth
+
+# ONNX models (excluded by default, force-add specific ones)
+*.onnx
+
+# YOLOv10 weights
+yolov10m.pt
 
 # Python cache
 __pycache__/

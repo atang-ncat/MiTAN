@@ -9,7 +9,12 @@ from launch_ros.descriptions import ComposableNode
 MODEL_INPUT_SIZE = 640
 MODEL_NUM_CHANNELS = 3
 
-ENGINE_FILE_PATH = '/workspaces/isaac_ros-dev/isaac_ros_assets/models/yolov10m/yolov10m.engine'
+MODEL_DIR = '/workspaces/isaac_ros-dev/isaac_ros_assets/models/yolov10m'
+ONNX_FILE_PATH = os.path.join(MODEL_DIR, 'yolov10m.onnx')
+ENGINE_FILE_PATH = os.path.join(MODEL_DIR, 'yolov10m.engine')
+
+# RPLiDAR serial port — override with env var if the port changes
+RPLIDAR_PORT = os.environ.get('RPLIDAR_PORT', '/dev/ttyUSB0')
 SLAM_TOOLBOX_PARAMS = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
     'config', 'slam_toolbox_params.yaml')
@@ -89,7 +94,7 @@ def generate_launch_description():
         name='sllidar_node',
         parameters=[{
             'channel_type': 'serial',
-            'serial_port': '/dev/ttyUSB0',
+            'serial_port': RPLIDAR_PORT,
             'serial_baudrate': 256000,
             'frame_id': 'laser_frame',
             'angle_compensate': True,
@@ -220,14 +225,14 @@ def generate_launch_description():
         package='isaac_ros_tensor_rt',
         plugin='nvidia::isaac_ros::dnn_inference::TensorRTNode',
         parameters=[{
-            'model_file_path': '',
+            'model_file_path': ONNX_FILE_PATH,
             'engine_file_path': ENGINE_FILE_PATH,
             'output_binding_names': ['output0'],
             'output_tensor_names': ['output_tensor'],
             'input_tensor_names': ['images'],
             'input_binding_names': ['images'],
             'verbose': False,
-            'force_engine_update': False,
+            'force_engine_update': True,  # Set to False after first successful engine build
         }],
     )
 
