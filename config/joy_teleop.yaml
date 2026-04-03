@@ -1,0 +1,32 @@
+# Gamepad mapping for teleop_twist_joy (verified via jstest)
+# Left stick Y  = forward/reverse (linear.x)
+# Right stick X = steering (angular.z)
+# LB (button 6 / BtnTL) = deadman switch (must hold to drive)
+
+teleop_twist_joy_node:
+  ros__parameters:
+    # Axis mapping (verified with jstest on this controller):
+    #   0 = left stick X      1 = left stick Y
+    #   2 = right stick X     3 = right stick Y
+    #   4 = LT (Gas)          5 = RT (Brake)
+    #   6 = D-pad X           7 = D-pad Y
+    axis_linear:
+      x: 1                    # left stick Y → forward/reverse
+    scale_linear:
+      x: 0.5                  # max m/s (matches serial_bridge max_linear_vel)
+    axis_angular:
+      yaw: 2                  # right stick X → steering
+    scale_angular:
+      yaw: 1.0                # max rad/s (matches serial_bridge max_angular_vel)
+
+    # Button mapping (verified with jstest):
+    #   0=A  1=B  2=C  3=X  4=Y  5=Z  6=TL(LB)  7=TR(RB)
+    #   8=TL2  9=TR2  10=Select  11=Start  12=Mode  13=ThumbL  14=ThumbR
+    enable_button: 6           # LB / BtnTL = deadman switch
+    enable_turbo_button: 7     # RB / BtnTR = turbo mode
+    scale_linear_turbo:
+      x: 0.5
+    scale_angular_turbo:
+      yaw: 1.0
+
+    require_enable_button: true

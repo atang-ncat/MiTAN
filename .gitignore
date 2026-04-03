@@ -18,6 +18,10 @@ build/
 install/
 log/
 
+# Container workspace build artifacts (built from source inside dev container)
+lidar_ws/
+realsense_ws/
+
 # OS
 .DS_Store
 *.swp
