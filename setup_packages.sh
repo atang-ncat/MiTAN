@@ -1,6 +1,18 @@
 #!/bin/bash
 set -e
 
+# ── Fix apt warnings ──────────────────────────────────────────────
+# 1. Remove stale yarn repo (not needed, missing GPG key)
+sudo rm -f /etc/apt/sources.list.d/yarn.list
+
+# 2. Migrate NVIDIA keys from deprecated trusted.gpg to trusted.gpg.d/
+if [ -f /etc/apt/trusted.gpg ]; then
+    echo "Migrating legacy apt keys to /etc/apt/trusted.gpg.d/..."
+    sudo cp /etc/apt/trusted.gpg /etc/apt/trusted.gpg.d/legacy-nvidia.gpg
+    sudo rm -f /etc/apt/trusted.gpg
+fi
+# ──────────────────────────────────────────────────────────────────
+
 sudo apt-get update && sudo apt-get install -y \
     ros-humble-isaac-ros-visual-slam \
     ros-humble-isaac-ros-tensor-rt \
