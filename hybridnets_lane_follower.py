@@ -282,6 +282,24 @@ class LaneFollowerNode(Node):
         lane_orig = self._mask_to_original(lane_mask, dw, dh, w_orig, h_orig)
         road_orig = self._mask_to_original(road_mask, dw, dh, w_orig, h_orig)
 
+        # ── Cap road mask width to reject floor outside the track ────
+        # The Quanser lab floor has similar colour/texture to the track,
+        # so HybridNets often segments it as "drivable."  Capping the
+        # mask width discards everything beyond the expected track width.
+        if road_orig is not None:
+            # Vectorised: find left/right road edge per row
+            road_any = (road_orig > 0)
+            row_has_road = road_any.any(axis=1)
+            for y_cap in np.where(row_has_road)[0]:
+                rp = np.where(road_any[y_cap])[0]
+                rl, rr = int(rp[0]), int(rp[-1])
+                if (rr - rl) > max_road_w:
+                    mid = (rl + rr) // 2
+                    new_rl = max(0, mid - max_road_w // 2)
+                    new_rr = min(w_orig - 1, mid + max_road_w // 2)
+                    road_orig[y_cap, :new_rl] = 0
+                    road_orig[y_cap, new_rr:] = 0
+
         img_hsv = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2HSV) \
             if lane_orig is not None else None
 
