@@ -53,17 +53,18 @@ class LaneFollowerNode(Node):
 
         # Driving parameters
         self.declare_parameter('cruise_speed', 0.08)       # m/s forward speed
-        self.declare_parameter('min_curve_speed', 0.18)    # m/s minimum speed on tight curves (PWM ~54 at max_pwm=150, above stall under load)
-        self.declare_parameter('curve_slowdown_factor', 0.5)  # how much to slow on curves (0=no slowdown, 1=full)
+        self.declare_parameter('min_curve_speed', 0.16)    # m/s minimum speed on tight curves (PWM ~48 at max_pwm=150)
+        self.declare_parameter('curve_slowdown_factor', 0.6)  # how much to slow on curves (0=no slowdown, 1=full)
         self.declare_parameter('kp', 0.8)                  # proportional gain
         self.declare_parameter('ki', 0.0)                  # integral gain
         self.declare_parameter('kd', 0.05)                 # derivative gain
         self.declare_parameter('max_angular_z', 0.8)       # max steering clamp
         self.declare_parameter('max_steer_rate', 0.15)     # max steering change per frame (rad/s) — prevents oscillation
         self.declare_parameter('lane_width_px', 200)       # assumed lane width for single-line fallback
-        self.declare_parameter('scan_row_start', 0.55)     # fraction from top — start of scan region
+        self.declare_parameter('max_road_width_px', 350)   # max expected road width in pixels — caps road mask to reject floor
+        self.declare_parameter('scan_row_start', 0.45)     # fraction from top — start of scan region (look further ahead)
         self.declare_parameter('scan_row_end', 0.85)       # fraction from top — end of scan region
-        self.declare_parameter('scan_num_rows', 8)         # number of rows to sample in scan region
+        self.declare_parameter('scan_num_rows', 10)        # number of rows to sample in scan region
         self.declare_parameter('no_lane_timeout', 1.5)     # seconds w/o lane → stop
         self.declare_parameter('road_fallback_speed', 0.06)  # slower speed when using road-only fallback
         self.declare_parameter('road_lane_bias', 0.65)       # 0.5=road center, 0.65=right lane bias
@@ -273,6 +274,7 @@ class LaneFollowerNode(Node):
         scan_end = self.get_parameter('scan_row_end').value
         num_rows = self.get_parameter('scan_num_rows').value
         lane_half_w = self.get_parameter('lane_width_px').value / 2.0
+        max_road_w = self.get_parameter('max_road_width_px').value
         road_bias = self.get_parameter('road_lane_bias').value
 
         image_cx = w_orig / 2.0
@@ -405,12 +407,19 @@ class LaneFollowerNode(Node):
             cx_vals = np.array([p[0] for p in center_points], dtype=np.float32)
             avg_cx = float(np.average(cx_vals, weights=weights))
 
-            # Clamp inside the drivable area
+            # Clamp inside the drivable area (with road width cap)
             if road_orig is not None:
                 scan_y = center_points[-1][1]
                 rp = np.where(road_orig[scan_y, :] > 0)[0]
                 if len(rp) > 10:
-                    avg_cx = np.clip(avg_cx, rp[0] + 10, rp[-1] - 10)
+                    rl, rr = float(rp[0]), float(rp[-1])
+                    # Cap road width to reject floor areas outside track
+                    road_w = rr - rl
+                    if road_w > max_road_w:
+                        road_cx_here = (rl + rr) / 2.0
+                        rl = road_cx_here - max_road_w / 2.0
+                        rr = road_cx_here + max_road_w / 2.0
+                    avg_cx = np.clip(avg_cx, rl + 10, rr - 10)
 
             error = float(np.clip((avg_cx - image_cx) / (w_orig / 2.0),
                                   -1.0, 1.0))
@@ -427,6 +436,12 @@ class LaneFollowerNode(Node):
                 rp = np.where(road_orig[y, :] > 0)[0]
                 if len(rp) > 20:
                     rl, rr = float(rp[0]), float(rp[-1])
+                    # Cap road width to reject floor areas outside track
+                    road_w = rr - rl
+                    if road_w > max_road_w:
+                        road_cx_here = (rl + rr) / 2.0
+                        rl = road_cx_here - max_road_w / 2.0
+                        rr = road_cx_here + max_road_w / 2.0
                     road_cx = rl + (rr - rl) * road_bias
                     road_centers.append((int(road_cx), y))
 
