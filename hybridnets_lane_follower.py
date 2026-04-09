@@ -60,6 +60,7 @@ class LaneFollowerNode(Node):
         self.declare_parameter('kd', 0.05)                 # derivative gain
         self.declare_parameter('max_angular_z', 0.8)       # max steering clamp
         self.declare_parameter('max_steer_rate', 0.15)     # max steering change per frame (rad/s) — prevents oscillation
+        self.declare_parameter('curvature_gain', 0.4)      # how much road curvature biases the steering error
         self.declare_parameter('lane_width_px', 200)       # assumed lane width for single-line fallback
         self.declare_parameter('max_road_width_px', 350)   # max expected road width in pixels — caps road mask to reject floor
         self.declare_parameter('scan_row_start', 0.45)     # fraction from top — start of scan region (look further ahead)
@@ -421,9 +422,25 @@ class LaneFollowerNode(Node):
                 center_points.append((int(center_x), y))
 
         if len(center_points) > 0:
-            weights = np.arange(1, len(center_points) + 1, dtype=np.float32)
+            # Weight top (further ahead) rows MORE so the vehicle
+            # anticipates curves instead of only reacting when close.
+            weights = np.arange(len(center_points), 0, -1, dtype=np.float32)
             cx_vals = np.array([p[0] for p in center_points], dtype=np.float32)
             avg_cx = float(np.average(cx_vals, weights=weights))
+
+            # ── Curvature detection ──────────────────────────────
+            # Measure how the lane center shifts from bottom (near)
+            # to top (far).  If top points are left of bottom, the
+            # road curves left and we should steer earlier.
+            curvature_gain = self.get_parameter('curvature_gain').value
+            if len(center_points) >= 4:
+                n = len(center_points)
+                top_cx = np.mean(cx_vals[:n // 3])       # far ahead
+                bot_cx = np.mean(cx_vals[2 * n // 3:])   # close
+                # Positive curvature = road curves left (top is left of bottom)
+                curvature = (bot_cx - top_cx) / (w_orig / 2.0)
+            else:
+                curvature = 0.0
 
             # Clamp inside the drivable area (with road width cap)
             if road_orig is not None:
@@ -431,7 +448,6 @@ class LaneFollowerNode(Node):
                 rp = np.where(road_orig[scan_y, :] > 0)[0]
                 if len(rp) > 10:
                     rl, rr = float(rp[0]), float(rp[-1])
-                    # Cap road width to reject floor areas outside track
                     road_w = rr - rl
                     if road_w > max_road_w:
                         road_cx_here = (rl + rr) / 2.0
@@ -440,6 +456,9 @@ class LaneFollowerNode(Node):
                     avg_cx = np.clip(avg_cx, rl + 10, rr - 10)
 
             error = float(np.clip((avg_cx - image_cx) / (w_orig / 2.0),
+                                  -1.0, 1.0))
+            # Add curvature bias: steer into the curve earlier
+            error = float(np.clip(error - curvature * curvature_gain,
                                   -1.0, 1.0))
             return error, True, dominant_src, center_points
 
