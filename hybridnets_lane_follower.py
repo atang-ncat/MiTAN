@@ -208,7 +208,7 @@ class LaneFollowerNode(Node):
         # Publish visualization (throttled to ~4 Hz to save CPU)
         try:
             self._vis_counter = getattr(self, '_vis_counter', 0) + 1
-            if self.vis_pub.get_subscription_count() > 0 and self._vis_counter % 3 == 0:
+            if self.vis_pub.get_subscription_count() > 0 and self._vis_counter % 5 == 0:
                 vis_img = self._draw_visualization(
                     img_small, road_mask, lane_mask, ratio, dw, dh,
                     detections, center_points, error, guidance_found, cmd)
@@ -288,18 +288,28 @@ class LaneFollowerNode(Node):
         # so HybridNets often segments it as "drivable."  Capping the
         # mask width discards everything beyond the expected track width.
         if road_orig is not None:
-            # Vectorised: find left/right road edge per row
+            # Fully vectorised road width cap (no Python loop)
             road_any = (road_orig > 0)
             row_has_road = road_any.any(axis=1)
-            for y_cap in np.where(row_has_road)[0]:
-                rp = np.where(road_any[y_cap])[0]
-                rl, rr = int(rp[0]), int(rp[-1])
-                if (rr - rl) > max_road_w:
-                    mid = (rl + rr) // 2
-                    new_rl = max(0, mid - max_road_w // 2)
-                    new_rr = min(w_orig - 1, mid + max_road_w // 2)
-                    road_orig[y_cap, :new_rl] = 0
-                    road_orig[y_cap, new_rr:] = 0
+            if row_has_road.any():
+                # For each row, find leftmost and rightmost road pixel
+                col_indices = np.arange(w_orig)
+                # Broadcast: road_any[y, x] * col_indices[x] → 0 where no road
+                # Use masked operations for left/right edge
+                masked = np.where(road_any, col_indices[np.newaxis, :], w_orig)
+                left_edges = masked.min(axis=1)  # leftmost road pixel per row
+                masked_r = np.where(road_any, col_indices[np.newaxis, :], -1)
+                right_edges = masked_r.max(axis=1)  # rightmost road pixel per row
+                widths = right_edges - left_edges
+                too_wide = row_has_road & (widths > max_road_w)
+                if too_wide.any():
+                    mids = (left_edges[too_wide] + right_edges[too_wide]) // 2
+                    new_left = np.maximum(0, mids - max_road_w // 2)
+                    new_right = np.minimum(w_orig - 1, mids + max_road_w // 2)
+                    wide_rows = np.where(too_wide)[0]
+                    for i, y_cap in enumerate(wide_rows):
+                        road_orig[y_cap, :new_left[i]] = 0
+                        road_orig[y_cap, new_right[i]:] = 0
 
         img_hsv = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2HSV) \
             if lane_orig is not None else None

@@ -64,6 +64,7 @@ class HybridNetsTRTInference:
         self.seg_list = self.config['seg_list']
         self.mean = np.array(self.config['mean'], dtype=np.float32)
         self.std = np.array(self.config['std'], dtype=np.float32)
+        self.inv_std = 1.0 / self.std            # pre-computed for speed
         self.conf_thresh = conf_thresh
         self.iou_thresh = iou_thresh
 
@@ -147,14 +148,17 @@ class HybridNetsTRTInference:
             print(f"[HybridNets-TRT] Output: {info['name']} {info['shape']} ({info['dtype'].__name__})")
 
     def _preprocess(self, img_bgr):
-        """Preprocess image: letterbox + normalize."""
+        """Preprocess image: letterbox + normalize (optimised)."""
         img_lb, ratio, (dw, dh) = _letterbox(img_bgr, (INPUT_H, INPUT_W))
         img_rgb = cv2.cvtColor(img_lb, cv2.COLOR_BGR2RGB)
-        img_float = img_rgb.astype(np.float32) / 255.0
-        img_float = (img_float - self.mean) / self.std
-        img_chw = np.transpose(img_float, (2, 0, 1))
-        img_batch = np.expand_dims(img_chw, axis=0).astype(np.float32)
-        return np.ascontiguousarray(img_batch), ratio, dw, dh
+        # In-place float conversion + normalize (avoids extra allocations)
+        img_float = img_rgb.astype(np.float32)
+        img_float *= (1.0 / 255.0)
+        img_float -= self.mean
+        img_float *= self.inv_std
+        # Transpose HWC→CHW and add batch dim
+        img_chw = img_float.transpose(2, 0, 1)
+        return np.ascontiguousarray(img_chw[np.newaxis]), ratio, dw, dh
 
     def run(self, img_bgr):
         """Run inference on a BGR image.
@@ -194,7 +198,8 @@ class HybridNetsTRTInference:
                 ctypes.c_size_t(info['nbytes']),
                 ctypes.c_int(MEMCPY_D2H)
             )
-            outputs.append(info['host'].copy())
+            # Use view instead of copy — avoids allocation
+            outputs.append(info['host'])
 
         # Identify outputs by shape: regression, classification, segmentation
         regression = None
