@@ -29,7 +29,7 @@ def generate_launch_description():
         'max_speed_pwm', default_value='150',
         description='Maximum motor PWM (0-255). Tuned for lane-following.')
     cruise_speed_arg = DeclareLaunchArgument(
-        'cruise_speed', default_value='0.15',
+        'cruise_speed', default_value='0.20',
         description='Autonomous cruising speed (m/s)')
 
 

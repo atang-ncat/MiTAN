@@ -53,7 +53,7 @@ class LaneFollowerNode(Node):
 
         # Driving parameters
         self.declare_parameter('cruise_speed', 0.08)       # m/s forward speed
-        self.declare_parameter('min_curve_speed', 0.14)    # m/s minimum speed on tight curves (PWM ~42, above stall under load)
+        self.declare_parameter('min_curve_speed', 0.18)    # m/s minimum speed on tight curves (PWM ~54 at max_pwm=150, above stall under load)
         self.declare_parameter('curve_slowdown_factor', 0.3)  # how much to slow on curves (0=no slowdown, 1=full)
         self.declare_parameter('kp', 0.8)                  # proportional gain
         self.declare_parameter('ki', 0.0)                  # integral gain
@@ -295,6 +295,26 @@ class LaneFollowerNode(Node):
                 if len(lane_pixels) < 3:
                     continue
 
+                # ── Layer 1: Filter lane pixels outside drivable area ─
+                # At corners the bold straight white line diverges from
+                # the road; removing pixels outside the road mask keeps
+                # only the dotted curve lines that follow the actual turn.
+                if road_orig is not None:
+                    road_row = road_orig[y, :]
+                    inside_road = road_row[lane_pixels] > 0
+                    # Allow a small margin (8 px) outside the road edge
+                    # so lines right at the boundary are kept.
+                    if np.any(inside_road):
+                        rp = np.where(road_row > 0)[0]
+                        if len(rp) > 0:
+                            road_left = rp[0] - 8
+                            road_right = rp[-1] + 8
+                            lane_pixels = lane_pixels[
+                                (lane_pixels >= road_left) &
+                                (lane_pixels <= road_right)]
+                    if len(lane_pixels) < 3:
+                        continue
+
                 gaps = np.diff(lane_pixels)
                 gap_threshold = w_orig * 0.12
                 large_gaps = np.where(gaps > gap_threshold)[0]
@@ -306,6 +326,54 @@ class LaneFollowerNode(Node):
                     right_px = lane_pixels[split + 1:]
                     left_med = float(np.median(left_px))
                     right_med = float(np.median(right_px))
+
+                    # ── Layer 2: Lane width sanity check ──────────
+                    # If the gap between clusters is much wider than
+                    # expected lane width, we're probably spanning
+                    # across the dotted curve line AND the bold
+                    # straight line.  In that case, pick the pair
+                    # whose right cluster is closest to the road
+                    # mask right edge (the actual lane boundary).
+                    cluster_gap = right_med - left_med
+                    max_expected = lane_half_w * 2.0 * 1.5  # 1.5× lane width
+
+                    if cluster_gap > max_expected and road_orig is not None:
+                        rp = np.where(road_orig[y, :] > 0)[0]
+                        if len(rp) > 20:
+                            road_right_edge = float(rp[-1])
+                            # If right cluster is far from road edge,
+                            # it might be the bold outer line.  Check
+                            # if there's a third cluster in between.
+                            all_splits = large_gaps
+                            if len(all_splits) >= 2:
+                                # 3+ clusters: pick the two innermost
+                                # (i.e. closest pair straddling the road)
+                                segments = []
+                                prev = 0
+                                for si in all_splits:
+                                    segments.append(lane_pixels[prev:si + 1])
+                                    prev = si + 1
+                                segments.append(lane_pixels[prev:])
+
+                                # Find best pair: smallest gap that
+                                # still straddles the expected lane center
+                                best_pair = None
+                                best_gap = float('inf')
+                                for i in range(len(segments) - 1):
+                                    lm = float(np.median(segments[i]))
+                                    rm = float(np.median(segments[i + 1]))
+                                    g = rm - lm
+                                    if g < best_gap:
+                                        best_gap = g
+                                        best_pair = (lm, rm)
+                                if best_pair is not None:
+                                    left_med, right_med = best_pair
+                            else:
+                                # Only 2 clusters but too wide:
+                                # Clamp right boundary to road edge
+                                right_med = min(right_med,
+                                                road_right_edge)
+
                     center_x = (left_med + right_med) / 2.0
                     dominant_src = 'two_lanes'
                 else:
