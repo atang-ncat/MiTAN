@@ -54,11 +54,12 @@ class LaneFollowerNode(Node):
         # Driving parameters
         self.declare_parameter('cruise_speed', 0.08)       # m/s forward speed
         self.declare_parameter('min_curve_speed', 0.18)    # m/s minimum speed on tight curves (PWM ~54 at max_pwm=150, above stall under load)
-        self.declare_parameter('curve_slowdown_factor', 0.3)  # how much to slow on curves (0=no slowdown, 1=full)
+        self.declare_parameter('curve_slowdown_factor', 0.5)  # how much to slow on curves (0=no slowdown, 1=full)
         self.declare_parameter('kp', 0.8)                  # proportional gain
         self.declare_parameter('ki', 0.0)                  # integral gain
         self.declare_parameter('kd', 0.05)                 # derivative gain
         self.declare_parameter('max_angular_z', 0.8)       # max steering clamp
+        self.declare_parameter('max_steer_rate', 0.15)     # max steering change per frame (rad/s) — prevents oscillation
         self.declare_parameter('lane_width_px', 200)       # assumed lane width for single-line fallback
         self.declare_parameter('scan_row_start', 0.55)     # fraction from top — start of scan region
         self.declare_parameter('scan_row_end', 0.85)       # fraction from top — end of scan region
@@ -96,7 +97,8 @@ class LaneFollowerNode(Node):
         self.prev_error = 0.0
         self.integral_error = 0.0
         self.smoothed_error = 0.0          # EMA-smoothed lateral error
-        self.error_smooth_alpha = 0.3      # EMA factor (0=full smooth, 1=no smooth)
+        self.error_smooth_alpha = 0.15     # EMA factor (0=full smooth, 1=no smooth)
+        self.prev_steering = 0.0           # for steering rate limiter
         self.last_lane_time = time.time()
         self.last_inference_time = time.time()
         self.frame_count = 0
@@ -515,6 +517,13 @@ class LaneFollowerNode(Node):
 
         steering = -(kp * error + ki * self.integral_error + kd * d_error)
         steering = np.clip(steering, -max_ang, max_ang)
+
+        # Steering rate limiter: prevent wild oscillation
+        max_steer_rate = self.get_parameter('max_steer_rate').value
+        delta = steering - self.prev_steering
+        if abs(delta) > max_steer_rate:
+            steering = self.prev_steering + np.sign(delta) * max_steer_rate
+        self.prev_steering = steering
 
         self.prev_error = error
 
