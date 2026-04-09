@@ -26,8 +26,8 @@ def generate_launch_description():
         'serial_port', default_value='/dev/ttyACM0',
         description='Arduino serial port')
     max_speed_arg = DeclareLaunchArgument(
-        'max_speed_pwm', default_value='60',
-        description='Maximum motor PWM (0-255). Conservative for lane-following.')
+        'max_speed_pwm', default_value='150',
+        description='Maximum motor PWM (0-255). Tuned for lane-following.')
     cruise_speed_arg = DeclareLaunchArgument(
         'cruise_speed', default_value='0.15',
         description='Autonomous cruising speed (m/s)')

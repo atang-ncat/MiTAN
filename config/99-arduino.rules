@@ -1,0 +1,11 @@
+# Grant read/write access to Arduino Mega on /dev/ttyACM*
+# This eliminates the need for 'sudo chmod 666 /dev/ttyACM0' after every reboot/replug.
+#
+# Install: sudo cp 99-arduino.rules /etc/udev/rules.d/
+#          sudo udevadm control --reload-rules
+#          sudo udevadm trigger
+#
+# Then unplug and replug the Arduino.
+
+SUBSYSTEM=="tty", ATTRS{idVendor}=="2341", MODE="0666"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", MODE="0666"
