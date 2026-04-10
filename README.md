@@ -12,7 +12,7 @@ Real-time autonomous lane-following system for the **Yahboom Ackermann** vehicle
 │             │     └──────────────┘
 │ RGB ────────┤     ┌──────────────┐     ┌─────────────────┐
 │             │────▶│  HybridNets  │────▶│  Lane Follower  │
-│             │     │  (TensorRT)  │     │  (PD Controller) │
+│             │     │  (TensorRT)  │     │  (PID Control)  │
 │             │     │              │     └────────┬────────┘
 │             │     │ Lane Lines   │              │ /cmd_vel_auto
 │             │     │ Road Seg.    │     ┌────────▼────────┐
@@ -67,7 +67,7 @@ Input: 384 × 640 (H × W) · ONNX opset 18 · TensorRT FP16
 | `lane_follow.launch.py` | **Lane-following stack** (camera + HybridNets + mux + serial) |
 | `vslam_yolov10_realsense.launch.py` | Perception stack (VSLAM + YOLOv10 + LiDAR + SLAM) |
 | `teleop.launch.py` | Gamepad teleop (joy + serial bridge) |
-| `hybridnets_lane_follower.py` | Lane-following ROS 2 node (tiered guidance + PD control) |
+| `hybridnets_lane_follower.py` | Lane-following ROS 2 node (two-pass guidance + PID control) |
 | `cmd_vel_mux.py` | Priority-based velocity mux (teleop > autonomous) |
 | `serial_bridge.py` | ROS 2 → Arduino serial bridge (`S<speed>,A<angle>`) |
 | `hybridnets_deploy/` | HybridNets model, config, TRT conversion, inference code |
@@ -110,22 +110,46 @@ ros2 launch teleop.launch.py serial_port:=/dev/ttyACM0
 
 ## Lane-Following Logic
 
-The system uses a **4-tier guidance extraction** from HybridNets output:
+The lane follower uses a **two-pass global priority system** built on
+HybridNets segmentation and HSV color detection:
 
-| Tier | Condition | Method | Speed |
-|------|-----------|--------|-------|
-| 1 (best) | Two lane lines | Midpoint between left/right | 0.15 m/s |
-| 2 (good) | One lane line | Offset by assumed width | 0.15 m/s |
-| 3 (fallback) | Road mask only | Drivable area centroid | 0.08 m/s |
-| 4 (fail) | Nothing visible | Stop after 1.5s timeout | 0 m/s |
+### Pass 1 — Detect
 
-Additional features:
+Scan 10 horizontal rows (45%–85% of frame height) and classify every
+lane-mask cluster by color using HSV analysis:
+
+- **Yellow** → center lane line
+- **White / Unknown** → edge lane line
+
+Yellow and white detections are collected **separately** across all rows.
+
+### Pass 2 — Decide (globally, never mixed)
+
+| Priority | Condition | Steering Target | Speed |
+|----------|-----------|-----------------|-------|
+| 1 (best) | Yellow found in **any** row | Drive to the right of the yellow line (offset ≈ 35–70 px) | cruise (0.20 m/s) |
+| 2 (fallback) | **No yellow at all** | Stay left of the rightmost white line | cruise (0.20 m/s) |
+| 3 (emergency) | No lane lines at all | Road-mask drivable area, right-biased | reduced (0.06 m/s) |
+| 4 (fail) | Nothing visible for 1.5 s | Full stop | 0 m/s |
+
+> **Key design choice:** Yellow and white are **never mixed** in the same
+> frame.  If yellow is visible in even a single scan row, all white
+> detections are ignored.  This prevents the white edge line from
+> contaminating the steering path at corners where yellow curves but
+> white goes straight.
+
+### Smoothing & Control
+
+- **Quadratic polyfit** on center points preserves curve shape (degree-2, not linear)
+- **Look-ahead weighting** — top scan rows (further ahead) weighted more heavily to anticipate curves
+- **Adaptive EMA** — smoothing factor increases on curves for faster response
+- **PID controller** — proportional + derivative steering with rate limiter to prevent oscillation
 - **Curve speed reduction** — slows proportionally to steering angle (60% at max turn)
-- **Traffic light response** — stops on red, goes on green
-- **Road mask safety clamp** — constrains steering target within drivable area
-- **Gamepad override** — hold LB for manual control at any time
 
-See [LANE_FOLLOWING_LOGIC.md](LANE_FOLLOWING_LOGIC.md) for full algorithm details.
+### Additional Features
+
+- **Traffic light response** — stops on red, goes on green (currently disabled)
+- **Gamepad override** — hold LB for manual control at any time
 
 ## Gamepad Controls
 
@@ -141,18 +165,24 @@ See [LANE_FOLLOWING_LOGIC.md](LANE_FOLLOWING_LOGIC.md) for full algorithm detail
 Adjustable at runtime via `ros2 param set`:
 
 ```bash
-ros2 param set /hybridnets_lane_follower cruise_speed 0.2
-ros2 param set /hybridnets_lane_follower kp 0.008
+ros2 param set /hybridnets_lane_follower cruise_speed 0.25
+ros2 param set /hybridnets_lane_follower kp 1.0
 ```
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
-| `cruise_speed` | 0.15 | Forward speed on straights (m/s) |
-| `kp` | 0.005 | Proportional steering gain |
-| `kd` | 0.002 | Derivative steering gain (dampens oscillation) |
+| `cruise_speed` | 0.08 | Forward speed on straights (m/s), overridden to 0.20 via launch |
+| `min_curve_speed` | 0.16 | Minimum speed on tight curves (m/s) |
+| `kp` | 0.8 | Proportional steering gain |
+| `kd` | 0.20 | Derivative steering gain (dampens oscillation) |
 | `max_angular_z` | 0.8 | Max steering output (rad/s) |
+| `max_steer_rate` | 0.30 | Max steering change per frame (prevents oscillation) |
 | `curve_slowdown_factor` | 0.6 | Speed reduction on curves (0–1) |
-| `lane_width_px` | 200 | Assumed lane width for single-line fallback |
+| `lane_width_px` | 200 | Assumed lane width for offset calculation |
+| `scan_row_start` | 0.45 | Top of scan region (fraction from top) |
+| `scan_row_end` | 0.85 | Bottom of scan region (fraction from top) |
+| `scan_num_rows` | 10 | Number of horizontal rows to sample |
+| `no_lane_timeout` | 1.5 | Seconds without guidance before stopping |
 
 ## Known Issues
 
@@ -171,10 +201,10 @@ ros2 param set /hybridnets_lane_follower kp 0.008
 - [x] 2D occupancy grid mapping
 - [x] HybridNets fine-tuning on Quanser map dataset
 - [x] HybridNets TensorRT deployment
-- [x] Lane-following node with tiered guidance
-- [x] Traffic light response
+- [x] Two-pass lane following (yellow priority, white fallback)
 - [x] Curve speed reduction
 - [x] cmd_vel mux with gamepad override
-- [ ] Live track validation and PID tuning
+- [x] Live track validation and tuning
+- [ ] Traffic light response (re-enable after tuning)
 - [ ] Nav2 integration with lane constraints
 - [ ] Depth-based obstacle avoidance
