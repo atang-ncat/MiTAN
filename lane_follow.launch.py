@@ -38,7 +38,7 @@ def generate_launch_description():
         package='realsense2_camera',
         executable='realsense2_camera_node',
         name='camera',
-        namespace='',
+        namespace='camera',
         parameters=[{
             'enable_color': True,
             'enable_depth': False,
@@ -52,13 +52,14 @@ def generate_launch_description():
         output='screen',
     )
 
-    # ── HybridNets Lane Follower ──────────────────────────────────
+    # ── HybridNets Lane Follower ─────────────────────────────────────
     lane_follower = launch.actions.ExecuteProcess(
         cmd=[
             'python3',
             os.path.join(SCRIPT_DIR, 'hybridnets_lane_follower.py'),
             '--ros-args',
             '-p', ['cruise_speed:=', LaunchConfiguration('cruise_speed')],
+            '-p', 'camera_topic:=/camera/camera/color/image_raw',
         ],
         output='screen',
     )

@@ -1,0 +1,1023 @@
+[INFO] [launch]: All log files can be found below /home/admin/.ros/log/2026-04-10-13-04-51-086159-atang-14051
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [launch.user]: 
+========================================
+[INFO] [launch.user]:   Canny Lane Following Stack
+[INFO] [launch.user]:   Hold LB for gamepad override
+[INFO] [launch.user]: ========================================
+
+[INFO] [realsense2_camera_node-1]: process started with pid [14053]
+[INFO] [python3-2]: process started with pid [14055]
+[INFO] [python3-3]: process started with pid [14057]
+[INFO] [joy_node-4]: process started with pid [14059]
+[INFO] [teleop_node-5]: process started with pid [14062]
+[INFO] [python3-6]: process started with pid [14064]
+[teleop_node-5] [INFO] [1775840691.384865499] [TeleopTwistJoy]: Teleop enable button 6.
+[teleop_node-5] [INFO] [1775840691.385012057] [TeleopTwistJoy]: Turbo on button 7.
+[teleop_node-5] [INFO] [1775840691.385024313] [TeleopTwistJoy]: Linear axis x on 1 at scale 0.500000.
+[teleop_node-5] [INFO] [1775840691.385040249] [TeleopTwistJoy]: Turbo for linear axis x is scale 0.500000.
+[teleop_node-5] [INFO] [1775840691.385046649] [TeleopTwistJoy]: Angular axis yaw on 2 at scale 1.000000.
+[teleop_node-5] [INFO] [1775840691.385052377] [TeleopTwistJoy]: Turbo for angular axis yaw is scale 1.000000.
+[realsense2_camera_node-1] [INFO] [1775840691.474044955] [camera.camera]: RealSense ROS v4.57.7
+[realsense2_camera_node-1] [INFO] [1775840691.474269689] [camera.camera]: Built with LibRealSense v2.57.7
+[realsense2_camera_node-1] [INFO] [1775840691.474295288] [camera.camera]: Running with LibRealSense v2.57.7
+[realsense2_camera_node-1]  10/04 13:04:51,475 ERROR [281472742254816] (context.cpp:41) No valid configuration file found at : /home/admin/.realsense-config.json loading defaults
+[realsense2_camera_node-1]  10/04 13:04:51,743 WARNING [281472742254816] (ds-motion-common.cpp:452) No HID info provided, IMU is disabled
+[realsense2_camera_node-1]  10/04 13:04:51,743 ERROR [281472742254816] (d400-motion.cpp:185) Intel RealSense D455 #234322305686 - HID Motion Sensor Failure! bad optional access
+[realsense2_camera_node-1] [INFO] [1775840691.745522644] [camera.camera]: Device with serial number 234322305686 was found.
+[realsense2_camera_node-1] 
+[realsense2_camera_node-1] [INFO] [1775840691.745691314] [camera.camera]: Device with physical ID /sys/devices/platform/bus@0/3610000.usb/usb2/2-3/2-3.4/2-3.4:1.0/video4linux/video0 was found.
+[realsense2_camera_node-1] [INFO] [1775840691.745852209] [camera.camera]: Device with name Intel RealSense D455 was found.
+[realsense2_camera_node-1] [INFO] [1775840691.746222893] [camera.camera]: Device with port number 2-3.4 was found.
+[realsense2_camera_node-1] [INFO] [1775840691.746256365] [camera.camera]: Device USB type: 3.2
+[realsense2_camera_node-1] [INFO] [1775840691.746400267] [camera.camera]: getParameters...
+[realsense2_camera_node-1] [INFO] [1775840691.747323874] [camera.camera]: JSON file is not provided
+[realsense2_camera_node-1] [INFO] [1775840691.747363714] [camera.camera]: Device Name: Intel RealSense D455
+[realsense2_camera_node-1] [INFO] [1775840691.747381761] [camera.camera]: Device Serial No: 234322305686
+[realsense2_camera_node-1] [INFO] [1775840691.747400673] [camera.camera]: Device physical port: /sys/devices/platform/bus@0/3610000.usb/usb2/2-3/2-3.4/2-3.4:1.0/video4linux/video0
+[realsense2_camera_node-1] [INFO] [1775840691.747412513] [camera.camera]: Device FW version: 5.17.0.10
+[realsense2_camera_node-1] [INFO] [1775840691.747422017] [camera.camera]: Device Product ID: 0x0B5C
+[realsense2_camera_node-1] [INFO] [1775840691.747430721] [camera.camera]: Sync Mode: Off
+[realsense2_camera_node-1] [WARN] [1775840691.962776398] [camera.camera]: Could not set param: rgb_camera.power_line_frequency with 3 Range: [0, 2]: parameter 'rgb_camera.power_line_frequency' could not be set: Parameter {rgb_camera.power_line_frequency} doesn't comply with integer range.
+[realsense2_camera_node-1] [INFO] [1775840691.979532710] [camera.camera]: Stopping Sensor: RGB Camera
+[realsense2_camera_node-1] [INFO] [1775840692.013668335] [camera.camera]: Starting Sensor: RGB Camera
+[python3-6] [INFO] [1775840692.018635581] [serial_bridge]: Opened serial port /dev/ttyACM0 at 115200 baud (DTR=False, RTS=False, DSR=False, CTS=True)
+[realsense2_camera_node-1] [INFO] [1775840692.027771649] [camera.camera]: Open profile: stream_type: Color(0), Format: RGB8, Width: 1280, Height: 720, FPS: 30
+[realsense2_camera_node-1] [INFO] [1775840692.065204713] [camera.camera]: RealSense Node Is Up!
+[python3-3] [INFO] [1775840692.074972967] [cmd_vel_mux]: cmd_vel_mux ready
+[python3-3] [INFO] [1775840692.075836030] [cmd_vel_mux]:   Priority 1: /cmd_vel_teleop (gamepad)
+[python3-3] [INFO] [1775840692.076576215] [cmd_vel_mux]:   Priority 2: /cmd_vel_auto (autonomous)
+[python3-3] [INFO] [1775840692.077145585] [cmd_vel_mux]:   Output:     /cmd_vel
+[python3-2] [INFO] [1775840692.798375911] [canny_lane_follower]: Canny lane follower ready — waiting for camera …
+[python3-6] [INFO] [1775840695.024873786] [serial_bridge]: --- Arduino boot output ---
+[python3-6] [INFO] [1775840695.026102734] [serial_bridge]: [ARDUINO] ================================
+[python3-6] [INFO] [1775840695.027181443] [serial_bridge]: [ARDUINO] ACKERMANN V4-DEBUG STARTING
+[python3-6] [INFO] [1775840695.028547221] [serial_bridge]: [ARDUINO] ================================
+[python3-6] [INFO] [1775840695.030019911] [serial_bridge]: [ARDUINO] [SETUP] Pins configured, motors stopped
+[python3-6] [INFO] [1775840695.031526552] [serial_bridge]: [ARDUINO] [SETUP] Pin assignments: DIR1=8 PWM1=9 DIR2=10 PWM2=11
+[python3-6] [INFO] [1775840695.032892202] [serial_bridge]: [ARDUINO] [SETUP] Timer2 note: Pin 9 (PWM1) and Pin 10 (DIR2) share Timer2!
+[python3-6] [INFO] [1775840695.033835872] [serial_bridge]: [ARDUINO] === PIN SELF-TEST ===
+[python3-6] [INFO] [1775840695.034916438] [serial_bridge]: [ARDUINO] DIR1(8): write HIGH���read 1, write LOW���read 0 ��� OK
+[python3-6] [INFO] [1775840695.036061578] [serial_bridge]: [ARDUINO] DIR2(10): write HIGH���read 1, write LOW���read 0 ��� OK
+[python3-6] [INFO] [1775840695.037280254] [serial_bridge]: [ARDUINO] PWM1(9): After analogWrite(100), TCCR2A=0x21 ��� DIR2(10) now reads: 0
+[python3-6] [INFO] [1775840695.038155957] [serial_bridge]: [ARDUINO] --- Timer2 Conflict Test ---
+[python3-6] [INFO] [1775840695.039013324] [serial_bridge]: [ARDUINO] Set DIR2=HIGH, read: 1
+[python3-6] [INFO] [1775840695.040012674] [serial_bridge]: [ARDUINO] After analogWrite(PWM1,100), DIR2 reads: 1
+[python3-6] [INFO] [1775840695.040981753] [serial_bridge]: [ARDUINO] After analogWrite(PWM1,0), DIR2 reads: 1
+[python3-6] [INFO] [1775840695.041980143] [serial_bridge]: [ARDUINO] --- Servo Interference Test ---
+[python3-6] [INFO] [1775840695.042992068] [serial_bridge]: [ARDUINO] After servo.write(92): DIR1=1 DIR2=1
+[python3-6] [INFO] [1775840695.044259608] [serial_bridge]: [ARDUINO] [PIN] POST-SELFTEST | DIR1(8)=1 DIR2(10)=1 | TCCR2A=0x1 OCR2A=0 OCR2B=100
+[python3-6] [INFO] [1775840695.045134287] [serial_bridge]: [ARDUINO] === SELF-TEST DONE ===
+[python3-6] [INFO] [1775840695.046254596] [serial_bridge]: [ARDUINO] [SETUP] ACKERMANN_V4_DEBUG_READY
+[python3-6] [INFO] [1775840695.047127707] [serial_bridge]: [ARDUINO] [SETUP] FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840695.048324879] [serial_bridge]: [ARDUINO] [SETUP] Waiting for serial commands (S<speed>,A<angle>)...
+[python3-6] [INFO] [1775840695.049049064] [serial_bridge]: --- end boot output ---
+[python3-6] [INFO] [1775840695.055488711] [serial_bridge]: Serial bridge ready, waiting for /cmd_vel...
+[python3-6] [INFO] [1775840695.081311876] [serial_bridge]: [TX #1] lin=0.000 ang=0.000 → S0,A92 (bytes: 53302c4139320a)
+[python3-6] [INFO] [1775840696.045183326] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840696.050839845] [serial_bridge]: [ARDUINO] [CMD #20] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840696.131166336] [serial_bridge]: [TX #22] lin=0.140 ang=-0.647 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840697.040807164] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840697.048245074] [serial_bridge]: [ARDUINO] [CMD #40] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840697.180751841] [serial_bridge]: [TX #43] lin=0.140 ang=-0.638 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840698.044404078] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840698.047530959] [serial_bridge]: [ARDUINO] [CMD #60] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840698.181247986] [serial_bridge]: [TX #63] lin=0.140 ang=-0.647 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840699.043158291] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840699.046910381] [serial_bridge]: [ARDUINO] [CMD #80] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840699.181975396] [serial_bridge]: [TX #83] lin=0.140 ang=-0.645 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840700.044096741] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840700.051742073] [serial_bridge]: [ARDUINO] [CMD #100] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840700.231000853] [serial_bridge]: [TX #104] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840701.045817906] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840701.049598157] [serial_bridge]: [ARDUINO] [CMD #120] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840701.280687170] [serial_bridge]: [TX #125] lin=0.140 ang=-0.638 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840702.048730423] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840702.058245752] [serial_bridge]: [ARDUINO] [CMD #140] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840702.332366751] [serial_bridge]: [TX #146] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840703.048919098] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840703.050167341] [serial_bridge]: [ARDUINO] [CMD #160] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840703.383962688] [serial_bridge]: [TX #167] lin=0.140 ang=-0.650 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840704.043707189] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840704.047624910] [serial_bridge]: [ARDUINO] [CMD #180] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840704.430929203] [serial_bridge]: [TX #188] lin=0.140 ang=-0.642 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840705.043391203] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840705.047153693] [serial_bridge]: [ARDUINO] [CMD #200] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840705.431103997] [serial_bridge]: [TX #208] lin=0.140 ang=-0.650 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840706.042531417] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840706.046786446] [serial_bridge]: [ARDUINO] [CMD #220] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840706.480830874] [serial_bridge]: [TX #229] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840707.049165159] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840707.053074400] [serial_bridge]: [ARDUINO] [CMD #240] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840707.482956535] [serial_bridge]: [TX #249] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840708.044503977] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840708.057905987] [serial_bridge]: [ARDUINO] [CMD #260] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840708.532154112] [serial_bridge]: [TX #270] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840709.043974693] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840709.048291290] [serial_bridge]: [ARDUINO] [CMD #280] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840709.586339290] [serial_bridge]: [TX #291] lin=0.140 ang=-0.656 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840710.044043453] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840710.048086645] [serial_bridge]: [ARDUINO] [CMD #300] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840710.631806479] [serial_bridge]: [TX #312] lin=0.140 ang=-0.648 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840711.043817916] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840711.047068380] [serial_bridge]: [ARDUINO] [CMD #320] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840711.633619995] [serial_bridge]: [TX #332] lin=0.140 ang=-0.643 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840712.043928314] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840712.047136378] [serial_bridge]: [ARDUINO] [CMD #340] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840712.683195565] [serial_bridge]: [TX #353] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840713.041881841] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840713.049536100] [serial_bridge]: [ARDUINO] [CMD #360] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840713.742426818] [serial_bridge]: [TX #374] lin=0.140 ang=-0.640 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840714.047396991] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840714.048891376] [serial_bridge]: [ARDUINO] [CMD #380] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840714.781489795] [serial_bridge]: [TX #395] lin=0.140 ang=-0.646 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840715.044546883] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840715.048613498] [serial_bridge]: [ARDUINO] [CMD #400] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840715.831744632] [serial_bridge]: [TX #416] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840716.043719958] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840716.047545808] [serial_bridge]: [ARDUINO] [CMD #420] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840716.833366613] [serial_bridge]: [TX #436] lin=0.140 ang=-0.654 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840717.043428999] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840717.051208377] [serial_bridge]: [ARDUINO] [CMD #440] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840717.833816193] [serial_bridge]: [TX #456] lin=0.140 ang=-0.638 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840718.046687703] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840718.053637554] [serial_bridge]: [ARDUINO] [CMD #460] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840718.885752078] [serial_bridge]: [TX #477] lin=0.140 ang=-0.654 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840719.042030777] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840719.046227663] [serial_bridge]: [ARDUINO] [CMD #480] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840719.931288703] [serial_bridge]: [TX #498] lin=0.140 ang=-0.643 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840720.041914961] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840720.050127103] [serial_bridge]: [ARDUINO] [CMD #500] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840720.933133829] [serial_bridge]: [TX #518] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840721.044756110] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840721.048912772] [serial_bridge]: [ARDUINO] [CMD #520] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840721.980868102] [serial_bridge]: [TX #539] lin=0.140 ang=-0.612 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840722.044862633] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840722.060974633] [serial_bridge]: [ARDUINO] [CMD #540] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840722.982259095] [serial_bridge]: [TX #559] lin=0.140 ang=-0.650 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840723.043425078] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840723.047398607] [serial_bridge]: [ARDUINO] [CMD #560] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840724.031683565] [serial_bridge]: [TX #580] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840724.043343129] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840724.046695832] [serial_bridge]: [ARDUINO] [CMD #580] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840725.042627429] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840725.049654399] [serial_bridge]: [ARDUINO] [CMD #600] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840725.080724778] [serial_bridge]: [TX #601] lin=0.140 ang=-0.609 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840726.041976531] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840726.049252555] [serial_bridge]: [ARDUINO] [CMD #620] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840726.081497578] [serial_bridge]: [TX #621] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840727.042422137] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840727.049565778] [serial_bridge]: [ARDUINO] [CMD #640] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840727.083127077] [serial_bridge]: [TX #641] lin=0.140 ang=-0.612 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840728.045033357] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840728.052022311] [serial_bridge]: [ARDUINO] [CMD #660] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840728.130550619] [serial_bridge]: [TX #662] lin=0.140 ang=-0.646 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840729.043318190] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840729.047590276] [serial_bridge]: [ARDUINO] [CMD #680] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840729.130722410] [serial_bridge]: [TX #682] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840730.042725543] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840730.046786265] [serial_bridge]: [ARDUINO] [CMD #700] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840730.130965374] [serial_bridge]: [TX #702] lin=0.140 ang=-0.646 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840731.042051471] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840731.046396072] [serial_bridge]: [ARDUINO] [CMD #720] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840731.131735440] [serial_bridge]: [TX #722] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840732.042765704] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840732.049179112] [serial_bridge]: [ARDUINO] [CMD #740] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840732.132419417] [serial_bridge]: [TX #742] lin=0.140 ang=-0.654 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840733.044645638] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840733.052217952] [serial_bridge]: [ARDUINO] [CMD #760] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840733.180987724] [serial_bridge]: [TX #763] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840734.050014522] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840734.052142299] [serial_bridge]: [ARDUINO] [CMD #780] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840734.231381366] [serial_bridge]: [TX #784] lin=0.140 ang=-0.650 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840735.043087238] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840735.050871023] [serial_bridge]: [ARDUINO] [CMD #800] raw='S42,A134' ��� speed=42 angle=134 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840735.280709274] [serial_bridge]: [TX #805] lin=0.140 ang=-0.647 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840736.042557570] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840736.050314958] [serial_bridge]: [ARDUINO] [CMD #820] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840736.281390347] [serial_bridge]: [TX #825] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840737.045707683] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840737.049909900] [serial_bridge]: [ARDUINO] [CMD #840] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840737.331253517] [serial_bridge]: [TX #846] lin=0.140 ang=-0.647 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840738.041066021] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840738.060970331] [serial_bridge]: [ARDUINO] [CMD #860] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840738.332226500] [serial_bridge]: [TX #866] lin=0.140 ang=-0.644 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840739.040459467] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840739.048185853] [serial_bridge]: [ARDUINO] [CMD #880] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840739.332381103] [serial_bridge]: [TX #886] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840740.044448773] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840740.047717924] [serial_bridge]: [ARDUINO] [CMD #900] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840740.380576260] [serial_bridge]: [TX #907] lin=0.140 ang=-0.643 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840741.042931347] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840741.056739341] [serial_bridge]: [ARDUINO] [CMD #920] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840741.430805180] [serial_bridge]: [TX #928] lin=0.140 ang=-0.650 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840742.045990167] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840742.050125577] [serial_bridge]: [ARDUINO] [CMD #940] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840742.431409839] [serial_bridge]: [TX #948] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840743.045732235] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840743.051758551] [serial_bridge]: [ARDUINO] [CMD #960] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840743.480798204] [serial_bridge]: [TX #969] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840744.044723819] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840744.049099113] [serial_bridge]: [ARDUINO] [CMD #980] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840744.482653692] [serial_bridge]: [TX #989] lin=0.140 ang=-0.649 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840745.044009819] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840745.047660986] [serial_bridge]: [ARDUINO] [CMD #1000] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840745.531314898] [serial_bridge]: [TX #1010] lin=0.140 ang=-0.647 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840746.047077512] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840746.050885658] [serial_bridge]: [ARDUINO] [CMD #1020] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840746.534178068] [serial_bridge]: [TX #1030] lin=0.140 ang=-0.658 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840747.042658928] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840747.050441381] [serial_bridge]: [ARDUINO] [CMD #1040] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840747.580751368] [serial_bridge]: [TX #1051] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840748.041737678] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840748.050627140] [serial_bridge]: [ARDUINO] [CMD #1060] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840748.630849406] [serial_bridge]: [TX #1072] lin=0.140 ang=-0.648 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840749.042456357] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840749.048950062] [serial_bridge]: [ARDUINO] [CMD #1080] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840749.631076433] [serial_bridge]: [TX #1092] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840750.044277286] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840750.049136894] [serial_bridge]: [ARDUINO] [CMD #1100] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840750.681492497] [serial_bridge]: [TX #1113] lin=0.140 ang=-0.634 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840751.043563692] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840751.047414172] [serial_bridge]: [ARDUINO] [CMD #1120] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840751.731136778] [serial_bridge]: [TX #1134] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840752.042843962] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840752.046932374] [serial_bridge]: [ARDUINO] [CMD #1140] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840752.732416008] [serial_bridge]: [TX #1154] lin=0.140 ang=-0.614 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840753.043568691] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840753.045823247] [serial_bridge]: [ARDUINO] [CMD #1160] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840753.782208089] [serial_bridge]: [TX #1175] lin=0.140 ang=-0.657 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840754.045263295] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840754.049387770] [serial_bridge]: [ARDUINO] [CMD #1180] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840754.830665650] [serial_bridge]: [TX #1196] lin=0.140 ang=-0.648 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840755.045429464] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840755.052430458] [serial_bridge]: [ARDUINO] [CMD #1200] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840755.830760475] [serial_bridge]: [TX #1216] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840756.044306887] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840756.048275152] [serial_bridge]: [ARDUINO] [CMD #1220] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840756.832444194] [serial_bridge]: [TX #1236] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840757.043325009] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840757.047563523] [serial_bridge]: [ARDUINO] [CMD #1240] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840757.880889771] [serial_bridge]: [TX #1257] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840758.042383069] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840758.046796897] [serial_bridge]: [ARDUINO] [CMD #1260] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840758.881318098] [serial_bridge]: [TX #1277] lin=0.140 ang=-0.654 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840759.043452386] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840759.046250738] [serial_bridge]: [ARDUINO] [CMD #1280] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840759.931130342] [serial_bridge]: [TX #1298] lin=0.140 ang=-0.636 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840760.041115699] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840760.049047721] [serial_bridge]: [ARDUINO] [CMD #1300] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840760.983698400] [serial_bridge]: [TX #1319] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840761.044403846] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840761.060001228] [serial_bridge]: [ARDUINO] [CMD #1320] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840762.031330649] [serial_bridge]: [TX #1340] lin=0.140 ang=-0.654 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840762.043524196] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840762.049088200] [serial_bridge]: [ARDUINO] [CMD #1340] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840763.042750111] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840763.046918650] [serial_bridge]: [ARDUINO] [CMD #1360] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840763.081636321] [serial_bridge]: [TX #1361] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840764.042176013] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840764.046191062] [serial_bridge]: [ARDUINO] [CMD #1380] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840764.136588112] [serial_bridge]: [TX #1382] lin=0.140 ang=-0.657 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840765.052755817] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840765.055219383] [serial_bridge]: [ARDUINO] [CMD #1400] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840765.181282108] [serial_bridge]: [TX #1403] lin=0.140 ang=-0.649 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840766.048206420] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840766.049493414] [serial_bridge]: [ARDUINO] [CMD #1420] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840766.230843771] [serial_bridge]: [TX #1424] lin=0.140 ang=-0.649 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840767.043983846] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840767.050154169] [serial_bridge]: [ARDUINO] [CMD #1440] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840767.231137253] [serial_bridge]: [TX #1444] lin=0.140 ang=-0.636 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840768.046388840] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840768.047639262] [serial_bridge]: [ARDUINO] [CMD #1460] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840768.282151428] [serial_bridge]: [TX #1465] lin=0.140 ang=-0.649 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840769.042363632] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840769.046406266] [serial_bridge]: [ARDUINO] [CMD #1480] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840769.331048583] [serial_bridge]: [TX #1486] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840770.041593575] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840770.045732265] [serial_bridge]: [ARDUINO] [CMD #1500] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840770.380601123] [serial_bridge]: [TX #1507] lin=0.140 ang=-0.610 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840771.040879804] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840771.048707847] [serial_bridge]: [ARDUINO] [CMD #1520] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840771.385704953] [serial_bridge]: [TX #1527] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840772.040348165] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840772.048160818] [serial_bridge]: [ARDUINO] [CMD #1540] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840772.430963513] [serial_bridge]: [TX #1548] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840773.043641773] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840773.053450612] [serial_bridge]: [ARDUINO] [CMD #1560] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840773.431711883] [serial_bridge]: [TX #1568] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840774.043313834] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840774.047165286] [serial_bridge]: [ARDUINO] [CMD #1580] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840774.481659096] [serial_bridge]: [TX #1589] lin=0.140 ang=-0.645 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840775.042094964] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840775.045962639] [serial_bridge]: [ARDUINO] [CMD #1600] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840775.530710463] [serial_bridge]: [TX #1610] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840776.049377526] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840776.058990353] [serial_bridge]: [ARDUINO] [CMD #1620] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840776.530884693] [serial_bridge]: [TX #1630] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840777.040921825] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840777.048541956] [serial_bridge]: [ARDUINO] [CMD #1640] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840777.581453939] [serial_bridge]: [TX #1651] lin=0.140 ang=-0.613 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840778.044530588] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840778.053371673] [serial_bridge]: [ARDUINO] [CMD #1660] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840778.582570180] [serial_bridge]: [TX #1671] lin=0.140 ang=-0.641 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840779.043133690] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840779.047464817] [serial_bridge]: [ARDUINO] [CMD #1680] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840779.632226341] [serial_bridge]: [TX #1692] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840780.042452317] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840780.046504203] [serial_bridge]: [ARDUINO] [CMD #1700] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840780.681313634] [serial_bridge]: [TX #1713] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840781.041972848] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840781.050492299] [serial_bridge]: [ARDUINO] [CMD #1720] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840781.734420927] [serial_bridge]: [TX #1734] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840782.041060071] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840782.048632594] [serial_bridge]: [ARDUINO] [CMD #1740] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840782.781119997] [serial_bridge]: [TX #1755] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840783.044298309] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840783.048069901] [serial_bridge]: [ARDUINO] [CMD #1760] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840783.830816847] [serial_bridge]: [TX #1776] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840784.043459926] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840784.047996319] [serial_bridge]: [ARDUINO] [CMD #1780] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840784.831389167] [serial_bridge]: [TX #1796] lin=0.140 ang=-0.631 → S42,A134 (bytes: 5334322c413133340a)
+[python3-6] [INFO] [1775840785.043259282] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840785.046885478] [serial_bridge]: [ARDUINO] [CMD #1800] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840785.841972500] [serial_bridge]: [TX #1816] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840786.041891949] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840786.046880818] [serial_bridge]: [ARDUINO] [CMD #1820] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840786.881726611] [serial_bridge]: [TX #1837] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840787.042693109] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840787.050363709] [serial_bridge]: [ARDUINO] [CMD #1840] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840787.930876502] [serial_bridge]: [TX #1858] lin=0.140 ang=-0.641 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840788.049019221] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840788.051265212] [serial_bridge]: [ARDUINO] [CMD #1860] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840788.932376755] [serial_bridge]: [TX #1878] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840789.045023589] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840789.048004304] [serial_bridge]: [ARDUINO] [CMD #1880] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840789.980703817] [serial_bridge]: [TX #1899] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840790.042945909] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840790.046970475] [serial_bridge]: [ARDUINO] [CMD #1900] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840790.982425208] [serial_bridge]: [TX #1919] lin=0.140 ang=-0.614 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840791.043929864] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840791.050003159] [serial_bridge]: [ARDUINO] [CMD #1920] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840792.032508336] [serial_bridge]: [TX #1940] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840792.049239128] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840792.053479037] [serial_bridge]: [ARDUINO] [CMD #1940] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840793.040866595] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840793.048652264] [serial_bridge]: [ARDUINO] [CMD #1960] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840793.081215589] [serial_bridge]: [TX #1961] lin=0.140 ang=-0.603 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840794.043901064] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840794.050123213] [serial_bridge]: [ARDUINO] [CMD #1980] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840794.130605612] [serial_bridge]: [TX #1982] lin=0.140 ang=-0.648 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840795.043305970] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840795.047561880] [serial_bridge]: [ARDUINO] [CMD #2000] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840795.130977235] [serial_bridge]: [TX #2002] lin=0.140 ang=-0.642 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840796.042700635] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840796.047886261] [serial_bridge]: [ARDUINO] [CMD #2020] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840796.182135831] [serial_bridge]: [TX #2023] lin=0.140 ang=-0.636 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840797.051267319] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840797.052572525] [serial_bridge]: [ARDUINO] [CMD #2040] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840797.231163218] [serial_bridge]: [TX #2044] lin=0.140 ang=-0.649 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840798.041356107] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840798.050245819] [serial_bridge]: [ARDUINO] [CMD #2060] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840798.280393349] [serial_bridge]: [TX #2065] lin=0.140 ang=-0.643 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840799.042201203] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840799.048708836] [serial_bridge]: [ARDUINO] [CMD #2080] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840799.280610525] [serial_bridge]: [TX #2085] lin=0.140 ang=-0.649 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840800.045080946] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840800.053802034] [serial_bridge]: [ARDUINO] [CMD #2100] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840800.280995076] [serial_bridge]: [TX #2105] lin=0.140 ang=-0.608 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840801.043476536] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840801.047550991] [serial_bridge]: [ARDUINO] [CMD #2120] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840801.330618147] [serial_bridge]: [TX #2126] lin=0.140 ang=-0.613 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840802.043648745] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840802.048298355] [serial_bridge]: [ARDUINO] [CMD #2140] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840802.331912606] [serial_bridge]: [TX #2146] lin=0.140 ang=-0.643 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840803.042428550] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840803.050733835] [serial_bridge]: [ARDUINO] [CMD #2160] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840803.332344473] [serial_bridge]: [TX #2166] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840804.041870441] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840804.055491299] [serial_bridge]: [ARDUINO] [CMD #2180] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840804.380727398] [serial_bridge]: [TX #2187] lin=0.140 ang=-0.641 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840805.046339123] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840805.056630970] [serial_bridge]: [ARDUINO] [CMD #2200] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840805.382447830] [serial_bridge]: [TX #2207] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840806.045935070] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840806.049606937] [serial_bridge]: [ARDUINO] [CMD #2220] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840806.445673767] [serial_bridge]: [TX #2228] lin=0.140 ang=-0.647 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840807.045115941] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840807.050110326] [serial_bridge]: [ARDUINO] [CMD #2240] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840807.483728892] [serial_bridge]: [TX #2249] lin=0.140 ang=-0.650 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840808.043462057] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840808.047207390] [serial_bridge]: [ARDUINO] [CMD #2260] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840808.530779975] [serial_bridge]: [TX #2270] lin=0.140 ang=-0.647 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840809.043063970] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840809.046767003] [serial_bridge]: [ARDUINO] [CMD #2280] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840809.531559453] [serial_bridge]: [TX #2290] lin=0.140 ang=-0.645 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840810.042472931] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840810.050115971] [serial_bridge]: [ARDUINO] [CMD #2300] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840810.532282098] [serial_bridge]: [TX #2310] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840811.041710892] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840811.050598186] [serial_bridge]: [ARDUINO] [CMD #2320] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840811.580800683] [serial_bridge]: [TX #2331] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840812.041386314] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840812.048600590] [serial_bridge]: [ARDUINO] [CMD #2340] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840812.581829152] [serial_bridge]: [TX #2351] lin=0.140 ang=-0.650 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840813.045510786] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840813.052945589] [serial_bridge]: [ARDUINO] [CMD #2360] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840813.630605736] [serial_bridge]: [TX #2372] lin=0.140 ang=-0.661 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840814.045313352] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840814.047367750] [serial_bridge]: [ARDUINO] [CMD #2380] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840814.630855410] [serial_bridge]: [TX #2392] lin=0.140 ang=-0.654 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840815.046450365] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840815.051243715] [serial_bridge]: [ARDUINO] [CMD #2400] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840815.681639871] [serial_bridge]: [TX #2413] lin=0.140 ang=-0.644 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840816.042054591] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840816.046560700] [serial_bridge]: [ARDUINO] [CMD #2420] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840816.731401056] [serial_bridge]: [TX #2434] lin=0.140 ang=-0.611 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840817.044726540] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840817.052888906] [serial_bridge]: [ARDUINO] [CMD #2440] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840817.732144311] [serial_bridge]: [TX #2454] lin=0.140 ang=-0.649 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840818.041549404] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840818.048412737] [serial_bridge]: [ARDUINO] [CMD #2460] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840818.781092025] [serial_bridge]: [TX #2475] lin=0.140 ang=-0.614 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840819.049194195] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840819.050440401] [serial_bridge]: [ARDUINO] [CMD #2480] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840819.831865807] [serial_bridge]: [TX #2496] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840820.043355202] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840820.047996118] [serial_bridge]: [ARDUINO] [CMD #2500] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840820.880747837] [serial_bridge]: [TX #2517] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840821.042469412] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840821.047661677] [serial_bridge]: [ARDUINO] [CMD #2520] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840821.881467684] [serial_bridge]: [TX #2537] lin=0.140 ang=-0.654 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840822.041749231] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840822.051059160] [serial_bridge]: [ARDUINO] [CMD #2540] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840822.930650297] [serial_bridge]: [TX #2558] lin=0.140 ang=-0.637 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840823.041303931] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840823.049064542] [serial_bridge]: [ARDUINO] [CMD #2560] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840823.931714521] [serial_bridge]: [TX #2578] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840824.044183354] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840824.047977299] [serial_bridge]: [ARDUINO] [CMD #2580] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840824.932211579] [serial_bridge]: [TX #2598] lin=0.140 ang=-0.649 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840825.045993796] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840825.047259585] [serial_bridge]: [ARDUINO] [CMD #2600] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840825.934703640] [serial_bridge]: [TX #2618] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840826.042789512] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840826.046892010] [serial_bridge]: [ARDUINO] [CMD #2620] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840826.980699801] [serial_bridge]: [TX #2639] lin=0.140 ang=-0.649 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840827.042280561] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840827.046083146] [serial_bridge]: [ARDUINO] [CMD #2640] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840827.981754615] [serial_bridge]: [TX #2659] lin=0.140 ang=-0.654 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840828.043368531] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840828.049965717] [serial_bridge]: [ARDUINO] [CMD #2660] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840829.030917825] [serial_bridge]: [TX #2680] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840829.040686638] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840829.048553582] [serial_bridge]: [ARDUINO] [CMD #2680] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840830.031046775] [serial_bridge]: [TX #2700] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840830.044142084] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840830.047982204] [serial_bridge]: [ARDUINO] [CMD #2700] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840831.043143495] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840831.047171760] [serial_bridge]: [ARDUINO] [CMD #2720] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840831.080799153] [serial_bridge]: [TX #2721] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840832.043953074] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840832.047704306] [serial_bridge]: [ARDUINO] [CMD #2740] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840832.136166364] [serial_bridge]: [TX #2742] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840833.041793078] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840833.045961078] [serial_bridge]: [ARDUINO] [CMD #2760] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840833.182256112] [serial_bridge]: [TX #2763] lin=0.140 ang=-0.637 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840834.041245746] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840834.048696695] [serial_bridge]: [ARDUINO] [CMD #2780] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840834.232399756] [serial_bridge]: [TX #2784] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840835.040548333] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840835.048652800] [serial_bridge]: [ARDUINO] [CMD #2800] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840835.280813644] [serial_bridge]: [TX #2805] lin=0.140 ang=-0.641 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840836.046310701] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840836.047682245] [serial_bridge]: [ARDUINO] [CMD #2820] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840836.281317050] [serial_bridge]: [TX #2825] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840837.051648419] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840837.052974750] [serial_bridge]: [ARDUINO] [CMD #2840] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840837.331459885] [serial_bridge]: [TX #2846] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840838.043143436] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840838.049816463] [serial_bridge]: [ARDUINO] [CMD #2860] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840838.382972983] [serial_bridge]: [TX #2867] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840839.050707935] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840839.055027574] [serial_bridge]: [ARDUINO] [CMD #2880] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840839.431014407] [serial_bridge]: [TX #2888] lin=0.140 ang=-0.642 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840840.041357804] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840840.048610596] [serial_bridge]: [ARDUINO] [CMD #2900] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840840.481390307] [serial_bridge]: [TX #2909] lin=0.140 ang=-0.634 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840841.041190352] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840841.049400225] [serial_bridge]: [ARDUINO] [CMD #2920] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840841.530694095] [serial_bridge]: [TX #2930] lin=0.140 ang=-0.643 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840842.057626972] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840842.063370440] [serial_bridge]: [ARDUINO] [CMD #2940] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840842.531924243] [serial_bridge]: [TX #2950] lin=0.140 ang=-0.613 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840843.051360947] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840843.052630995] [serial_bridge]: [ARDUINO] [CMD #2960] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840843.537674835] [serial_bridge]: [TX #2970] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840844.044787826] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840844.046800154] [serial_bridge]: [ARDUINO] [CMD #2980] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840844.581409136] [serial_bridge]: [TX #2991] lin=0.140 ang=-0.648 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840845.049331962] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840845.050710130] [serial_bridge]: [ARDUINO] [CMD #3000] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840845.630571375] [serial_bridge]: [TX #3012] lin=0.140 ang=-0.611 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840846.044487832] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840846.048479467] [serial_bridge]: [ARDUINO] [CMD #3020] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840846.632811161] [serial_bridge]: [TX #3032] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840847.043870600] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840847.049113885] [serial_bridge]: [ARDUINO] [CMD #3040] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840847.681287966] [serial_bridge]: [TX #3053] lin=0.140 ang=-0.637 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840848.049057396] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840848.051739115] [serial_bridge]: [ARDUINO] [CMD #3060] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840848.730578146] [serial_bridge]: [TX #3074] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840849.044665345] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840849.047516876] [serial_bridge]: [ARDUINO] [CMD #3080] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840849.731157543] [serial_bridge]: [TX #3094] lin=0.140 ang=-0.637 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840850.052270427] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840850.053537373] [serial_bridge]: [ARDUINO] [CMD #3100] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840850.780630191] [serial_bridge]: [TX #3115] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840851.044886728] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840851.048640431] [serial_bridge]: [ARDUINO] [CMD #3120] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840851.782198352] [serial_bridge]: [TX #3135] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840852.044914330] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840852.048926894] [serial_bridge]: [ARDUINO] [CMD #3140] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840852.831614957] [serial_bridge]: [TX #3156] lin=0.140 ang=-0.612 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840853.043447243] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840853.048620297] [serial_bridge]: [ARDUINO] [CMD #3160] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840853.831622664] [serial_bridge]: [TX #3176] lin=0.140 ang=-0.641 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840854.042786383] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840854.046879774] [serial_bridge]: [ARDUINO] [CMD #3180] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840854.834462143] [serial_bridge]: [TX #3196] lin=0.140 ang=-0.641 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840855.046645042] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840855.056095124] [serial_bridge]: [ARDUINO] [CMD #3200] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840855.881338333] [serial_bridge]: [TX #3217] lin=0.140 ang=-0.650 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840856.041289457] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840856.049009204] [serial_bridge]: [ARDUINO] [CMD #3220] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840856.932536820] [serial_bridge]: [TX #3238] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840857.048781478] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840857.065491536] [serial_bridge]: [ARDUINO] [CMD #3240] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840857.982340236] [serial_bridge]: [TX #3259] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840858.044266468] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840858.050129746] [serial_bridge]: [ARDUINO] [CMD #3260] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840859.031949423] [serial_bridge]: [TX #3280] lin=0.140 ang=-0.631 → S42,A134 (bytes: 5334322c413133340a)
+[python3-6] [INFO] [1775840859.044602344] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840859.047996942] [serial_bridge]: [ARDUINO] [CMD #3280] raw='S42,A134' ��� speed=42 angle=134 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840860.042683202] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840860.050259635] [serial_bridge]: [ARDUINO] [CMD #3300] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840860.081170346] [serial_bridge]: [TX #3301] lin=0.140 ang=-0.644 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840861.041790109] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840861.045944747] [serial_bridge]: [ARDUINO] [CMD #3320] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840861.130597007] [serial_bridge]: [TX #3322] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840862.041301256] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840862.048882587] [serial_bridge]: [ARDUINO] [CMD #3340] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840862.131193492] [serial_bridge]: [TX #3342] lin=0.140 ang=-0.637 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840863.044232230] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840863.049689685] [serial_bridge]: [ARDUINO] [CMD #3360] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840863.180825782] [serial_bridge]: [TX #3363] lin=0.140 ang=-0.648 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840864.043880194] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840864.053273521] [serial_bridge]: [ARDUINO] [CMD #3380] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840864.181472920] [serial_bridge]: [TX #3383] lin=0.140 ang=-0.643 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840865.044587902] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840865.054320949] [serial_bridge]: [ARDUINO] [CMD #3400] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840865.230398072] [serial_bridge]: [TX #3404] lin=0.140 ang=-0.622 → S42,A134 (bytes: 5334322c413133340a)
+[python3-6] [INFO] [1775840866.042590829] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840866.046689761] [serial_bridge]: [ARDUINO] [CMD #3420] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840866.231613904] [serial_bridge]: [TX #3424] lin=0.140 ang=-0.613 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840867.042543449] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840867.049334473] [serial_bridge]: [ARDUINO] [CMD #3440] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840867.281523986] [serial_bridge]: [TX #3445] lin=0.140 ang=-0.614 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840868.050654656] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840868.052535095] [serial_bridge]: [ARDUINO] [CMD #3460] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840868.335020422] [serial_bridge]: [TX #3466] lin=0.140 ang=-0.641 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840869.045091032] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840869.049088149] [serial_bridge]: [ARDUINO] [CMD #3480] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840869.381084591] [serial_bridge]: [TX #3487] lin=0.140 ang=-0.647 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840870.043393377] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840870.047377120] [serial_bridge]: [ARDUINO] [CMD #3500] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840870.387246017] [serial_bridge]: [TX #3507] lin=0.140 ang=-0.650 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840871.042565592] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840871.047129708] [serial_bridge]: [ARDUINO] [CMD #3520] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840871.430406980] [serial_bridge]: [TX #3528] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840872.041814836] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840872.046102525] [serial_bridge]: [ARDUINO] [CMD #3540] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840872.431014728] [serial_bridge]: [TX #3548] lin=0.140 ang=-0.647 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840873.041213968] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840873.049025243] [serial_bridge]: [ARDUINO] [CMD #3560] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840873.480772210] [serial_bridge]: [TX #3569] lin=0.140 ang=-0.641 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840874.044454147] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840874.048375879] [serial_bridge]: [ARDUINO] [CMD #3580] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840874.480939985] [serial_bridge]: [TX #3589] lin=0.140 ang=-0.631 → S42,A134 (bytes: 5334322c413133340a)
+[python3-6] [INFO] [1775840875.044210236] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840875.048568834] [serial_bridge]: [ARDUINO] [CMD #3600] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840875.535600416] [serial_bridge]: [TX #3610] lin=0.140 ang=-0.636 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840876.043110622] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840876.051812843] [serial_bridge]: [ARDUINO] [CMD #3620] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840876.580427210] [serial_bridge]: [TX #3631] lin=0.140 ang=-0.646 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840877.042440395] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840877.046273079] [serial_bridge]: [ARDUINO] [CMD #3640] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840877.581386491] [serial_bridge]: [TX #3651] lin=0.140 ang=-0.648 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840878.050471378] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840878.062177833] [serial_bridge]: [ARDUINO] [CMD #3660] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840878.581755553] [serial_bridge]: [TX #3671] lin=0.140 ang=-0.612 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840879.041612544] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840879.048929875] [serial_bridge]: [ARDUINO] [CMD #3680] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840879.632015640] [serial_bridge]: [TX #3692] lin=0.140 ang=-0.634 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840880.045035142] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840880.047928919] [serial_bridge]: [ARDUINO] [CMD #3700] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840880.685508795] [serial_bridge]: [TX #3713] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840881.043856096] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840881.052358272] [serial_bridge]: [ARDUINO] [CMD #3720] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840881.732010951] [serial_bridge]: [TX #3734] lin=0.140 ang=-0.649 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840882.042558636] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840882.056631711] [serial_bridge]: [ARDUINO] [CMD #3740] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840882.782312759] [serial_bridge]: [TX #3755] lin=0.140 ang=-0.654 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840883.041991693] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840883.046343127] [serial_bridge]: [ARDUINO] [CMD #3760] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840883.831144868] [serial_bridge]: [TX #3776] lin=0.140 ang=-0.614 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840884.041534799] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840884.049703466] [serial_bridge]: [ARDUINO] [CMD #3780] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840884.831265392] [serial_bridge]: [TX #3796] lin=0.140 ang=-0.612 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840885.054508479] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840885.056882135] [serial_bridge]: [ARDUINO] [CMD #3800] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840885.835924962] [serial_bridge]: [TX #3816] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840886.047844333] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840886.049793059] [serial_bridge]: [ARDUINO] [CMD #3820] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840886.881190331] [serial_bridge]: [TX #3837] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840887.043255503] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840887.047331182] [serial_bridge]: [ARDUINO] [CMD #3840] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840887.939811763] [serial_bridge]: [TX #3858] lin=0.140 ang=-0.612 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840888.061364434] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840888.065573192] [serial_bridge]: [ARDUINO] [CMD #3860] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840888.981677186] [serial_bridge]: [TX #3879] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840889.041890561] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840889.049524901] [serial_bridge]: [ARDUINO] [CMD #3880] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840890.030937114] [serial_bridge]: [TX #3900] lin=0.140 ang=-0.650 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840890.041077966] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840890.051403606] [serial_bridge]: [ARDUINO] [CMD #3900] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840891.045225126] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840891.048303661] [serial_bridge]: [ARDUINO] [CMD #3920] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840891.080933138] [serial_bridge]: [TX #3921] lin=0.140 ang=-0.649 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840892.045034680] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840892.050438076] [serial_bridge]: [ARDUINO] [CMD #3940] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840892.081247236] [serial_bridge]: [TX #3941] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840893.043276447] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840893.048165351] [serial_bridge]: [ARDUINO] [CMD #3960] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840893.081392233] [serial_bridge]: [TX #3961] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840894.044144468] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840894.046184005] [serial_bridge]: [ARDUINO] [CMD #3980] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840894.083247389] [serial_bridge]: [TX #3981] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840895.042165880] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840895.045486544] [serial_bridge]: [ARDUINO] [CMD #4000] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840895.130832661] [serial_bridge]: [TX #4002] lin=0.140 ang=-0.650 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840896.040925071] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840896.048615605] [serial_bridge]: [ARDUINO] [CMD #4020] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840896.180691775] [serial_bridge]: [TX #4023] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840897.043685781] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840897.047687069] [serial_bridge]: [ARDUINO] [CMD #4040] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840897.181204847] [serial_bridge]: [TX #4043] lin=0.140 ang=-0.613 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840898.043380087] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840898.047473914] [serial_bridge]: [ARDUINO] [CMD #4060] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840898.234813968] [serial_bridge]: [TX #4064] lin=0.140 ang=-0.648 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840899.043523968] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840899.046766718] [serial_bridge]: [ARDUINO] [CMD #4080] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840899.280611808] [serial_bridge]: [TX #4085] lin=0.140 ang=-0.642 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840900.046869872] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840900.048240433] [serial_bridge]: [ARDUINO] [CMD #4100] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840900.280687116] [serial_bridge]: [TX #4105] lin=0.140 ang=-0.607 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840901.044776128] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840901.048902530] [serial_bridge]: [ARDUINO] [CMD #4120] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840901.281033803] [serial_bridge]: [TX #4125] lin=0.140 ang=-0.612 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840902.044469562] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840902.048475684] [serial_bridge]: [ARDUINO] [CMD #4140] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840902.284945496] [serial_bridge]: [TX #4145] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840903.044029570] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840903.048386005] [serial_bridge]: [ARDUINO] [CMD #4160] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840903.330711385] [serial_bridge]: [TX #4166] lin=0.140 ang=-0.647 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840904.050377499] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840904.051902193] [serial_bridge]: [ARDUINO] [CMD #4180] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840904.381665155] [serial_bridge]: [TX #4187] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840905.042433428] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840905.046392834] [serial_bridge]: [ARDUINO] [CMD #4200] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840905.430611398] [serial_bridge]: [TX #4208] lin=0.140 ang=-0.647 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840906.041679584] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840906.046222567] [serial_bridge]: [ARDUINO] [CMD #4220] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840906.431431501] [serial_bridge]: [TX #4228] lin=0.140 ang=-0.650 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840907.041032778] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840907.051121779] [serial_bridge]: [ARDUINO] [CMD #4240] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840907.480654549] [serial_bridge]: [TX #4249] lin=0.140 ang=-0.645 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840908.040216163] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840908.049229752] [serial_bridge]: [ARDUINO] [CMD #4260] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840908.480702047] [serial_bridge]: [TX #4269] lin=0.140 ang=-0.641 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840909.044057697] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840909.048426453] [serial_bridge]: [ARDUINO] [CMD #4280] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840909.481170224] [serial_bridge]: [TX #4289] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840910.043056431] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840910.050067791] [serial_bridge]: [ARDUINO] [CMD #4300] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840910.482282649] [serial_bridge]: [TX #4309] lin=0.140 ang=-0.646 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840911.042648601] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840911.046793245] [serial_bridge]: [ARDUINO] [CMD #4320] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840911.531177856] [serial_bridge]: [TX #4330] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840912.050531151] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840912.053793584] [serial_bridge]: [ARDUINO] [CMD #4340] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840912.580568659] [serial_bridge]: [TX #4351] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840913.041083017] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840913.053328741] [serial_bridge]: [ARDUINO] [CMD #4360] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840913.581037917] [serial_bridge]: [TX #4371] lin=0.140 ang=-0.641 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840914.043299145] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840914.048135968] [serial_bridge]: [ARDUINO] [CMD #4380] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840914.581467404] [serial_bridge]: [TX #4391] lin=0.140 ang=-0.640 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840915.059901467] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840915.063838863] [serial_bridge]: [ARDUINO] [CMD #4400] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840915.630536241] [serial_bridge]: [TX #4412] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840916.042961529] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840916.046717369] [serial_bridge]: [ARDUINO] [CMD #4420] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840916.635073205] [serial_bridge]: [TX #4432] lin=0.140 ang=-0.643 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840917.047666585] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840917.048956386] [serial_bridge]: [ARDUINO] [CMD #4440] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840917.681215957] [serial_bridge]: [TX #4453] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840918.042734187] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840918.046007021] [serial_bridge]: [ARDUINO] [CMD #4460] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840918.730721244] [serial_bridge]: [TX #4474] lin=0.140 ang=-0.647 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840919.046380697] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840919.053615215] [serial_bridge]: [ARDUINO] [CMD #4480] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840919.731772989] [serial_bridge]: [TX #4494] lin=0.140 ang=-0.632 → S42,A134 (bytes: 5334322c413133340a)
+[python3-6] [INFO] [1775840920.045058809] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840920.047911064] [serial_bridge]: [ARDUINO] [CMD #4500] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840920.780700894] [serial_bridge]: [TX #4515] lin=0.140 ang=-0.612 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840921.043774968] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840921.053844273] [serial_bridge]: [ARDUINO] [CMD #4520] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840921.781343076] [serial_bridge]: [TX #4535] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840922.043007094] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840922.047173726] [serial_bridge]: [ARDUINO] [CMD #4540] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840922.781697886] [serial_bridge]: [TX #4555] lin=0.140 ang=-0.610 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840923.058772318] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840923.064643251] [serial_bridge]: [ARDUINO] [CMD #4560] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840923.831309417] [serial_bridge]: [TX #4576] lin=0.140 ang=-0.644 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840924.041803840] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840924.050875551] [serial_bridge]: [ARDUINO] [CMD #4580] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840924.880675343] [serial_bridge]: [TX #4597] lin=0.140 ang=-0.610 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840925.045724967] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840925.048440465] [serial_bridge]: [ARDUINO] [CMD #4600] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840925.930307630] [serial_bridge]: [TX #4618] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840926.050524757] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840926.051815455] [serial_bridge]: [ARDUINO] [CMD #4620] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840926.933040156] [serial_bridge]: [TX #4638] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840927.053224657] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840927.055986808] [serial_bridge]: [ARDUINO] [CMD #4640] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840927.982530004] [serial_bridge]: [TX #4659] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840928.046689846] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840928.055529640] [serial_bridge]: [ARDUINO] [CMD #4660] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840929.030689650] [serial_bridge]: [TX #4680] lin=0.140 ang=-0.650 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840929.043411618] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840929.050129986] [serial_bridge]: [ARDUINO] [CMD #4680] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840930.032071174] [serial_bridge]: [TX #4700] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840930.045456298] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840930.049708239] [serial_bridge]: [ARDUINO] [CMD #4700] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840931.035047375] [serial_bridge]: [TX #4720] lin=0.140 ang=-0.645 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840931.049065291] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840931.053629372] [serial_bridge]: [ARDUINO] [CMD #4720] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840932.045176735] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840932.051949981] [serial_bridge]: [ARDUINO] [CMD #4740] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840932.081088942] [serial_bridge]: [TX #4741] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840933.043474656] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840933.052259833] [serial_bridge]: [ARDUINO] [CMD #4760] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840933.130790499] [serial_bridge]: [TX #4762] lin=0.140 ang=-0.646 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840934.042497488] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840934.048500866] [serial_bridge]: [ARDUINO] [CMD #4780] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840934.131010732] [serial_bridge]: [TX #4782] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840935.042039837] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840935.046238055] [serial_bridge]: [ARDUINO] [CMD #4800] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840935.131841548] [serial_bridge]: [TX #4802] lin=0.140 ang=-0.647 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840936.042930095] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840936.048765294] [serial_bridge]: [ARDUINO] [CMD #4820] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840936.181505460] [serial_bridge]: [TX #4823] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840937.044392507] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840937.048288475] [serial_bridge]: [ARDUINO] [CMD #4840] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840937.181963024] [serial_bridge]: [TX #4843] lin=0.140 ang=-0.648 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840938.047911263] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840938.055609156] [serial_bridge]: [ARDUINO] [CMD #4860] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840938.232875313] [serial_bridge]: [TX #4864] lin=0.140 ang=-0.638 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840939.043036873] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840939.050725648] [serial_bridge]: [ARDUINO] [CMD #4880] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840939.282014287] [serial_bridge]: [TX #4885] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840940.044468435] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840940.053015554] [serial_bridge]: [ARDUINO] [CMD #4900] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840940.330752846] [serial_bridge]: [TX #4906] lin=0.140 ang=-0.638 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840941.047510866] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840941.050173251] [serial_bridge]: [ARDUINO] [CMD #4920] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840941.330762639] [serial_bridge]: [TX #4926] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840942.071905978] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840942.073593195] [serial_bridge]: [ARDUINO] [CMD #4940] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840942.380628718] [serial_bridge]: [TX #4947] lin=0.140 ang=-0.636 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840943.040172440] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840943.048513047] [serial_bridge]: [ARDUINO] [CMD #4960] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840943.380659757] [serial_bridge]: [TX #4967] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840944.046714604] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840944.050507700] [serial_bridge]: [ARDUINO] [CMD #4980] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840944.381493206] [serial_bridge]: [TX #4987] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840945.042696110] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840945.046651853] [serial_bridge]: [ARDUINO] [CMD #5000] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840945.432790787] [serial_bridge]: [TX #5008] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840946.042171594] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840946.046100939] [serial_bridge]: [ARDUINO] [CMD #5020] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840946.480700852] [serial_bridge]: [TX #5029] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840947.043390866] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840947.049073504] [serial_bridge]: [ARDUINO] [CMD #5040] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840947.480985664] [serial_bridge]: [TX #5049] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840948.040801965] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840948.048413727] [serial_bridge]: [ARDUINO] [CMD #5060] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840948.481991963] [serial_bridge]: [TX #5069] lin=0.140 ang=-0.645 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840949.044177378] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840949.048593092] [serial_bridge]: [ARDUINO] [CMD #5080] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840949.531136164] [serial_bridge]: [TX #5090] lin=0.140 ang=-0.642 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840950.047312740] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840950.051554226] [serial_bridge]: [ARDUINO] [CMD #5100] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840950.531271061] [serial_bridge]: [TX #5110] lin=0.140 ang=-0.648 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840951.046771408] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840951.054781291] [serial_bridge]: [ARDUINO] [CMD #5120] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840951.581566297] [serial_bridge]: [TX #5131] lin=0.140 ang=-0.635 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840952.044940300] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840952.051284338] [serial_bridge]: [ARDUINO] [CMD #5140] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840952.581886427] [serial_bridge]: [TX #5151] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840953.041475596] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840953.049121023] [serial_bridge]: [ARDUINO] [CMD #5160] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840953.630730146] [serial_bridge]: [TX #5172] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840954.040494472] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840954.048237589] [serial_bridge]: [ARDUINO] [CMD #5180] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840954.636276880] [serial_bridge]: [TX #5192] lin=0.140 ang=-0.635 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840955.046046075] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840955.047391972] [serial_bridge]: [ARDUINO] [CMD #5200] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840955.681635037] [serial_bridge]: [TX #5213] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840956.044843676] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840956.050762080] [serial_bridge]: [ARDUINO] [CMD #5220] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840956.682724132] [serial_bridge]: [TX #5233] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840957.042413350] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840957.051282638] [serial_bridge]: [ARDUINO] [CMD #5240] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840957.732236266] [serial_bridge]: [TX #5254] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840958.043313942] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840958.049384850] [serial_bridge]: [ARDUINO] [CMD #5260] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840958.780935271] [serial_bridge]: [TX #5275] lin=0.140 ang=-0.643 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840959.044841561] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840959.052537229] [serial_bridge]: [ARDUINO] [CMD #5280] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840959.831333051] [serial_bridge]: [TX #5296] lin=0.140 ang=-0.657 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840960.044110279] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840960.048022157] [serial_bridge]: [ARDUINO] [CMD #5300] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840960.881397192] [serial_bridge]: [TX #5317] lin=0.140 ang=-0.633 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840961.043597409] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840961.054720700] [serial_bridge]: [ARDUINO] [CMD #5320] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840961.930602447] [serial_bridge]: [TX #5338] lin=0.140 ang=-0.609 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840962.043686959] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840962.046935137] [serial_bridge]: [ARDUINO] [CMD #5340] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840962.931249034] [serial_bridge]: [TX #5358] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840963.058662374] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840963.059981683] [serial_bridge]: [ARDUINO] [CMD #5360] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840963.931274086] [serial_bridge]: [TX #5378] lin=0.140 ang=-0.643 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840964.041517295] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840964.049055857] [serial_bridge]: [ARDUINO] [CMD #5380] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840964.980451343] [serial_bridge]: [TX #5399] lin=0.140 ang=-0.638 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840965.041398137] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840965.048779141] [serial_bridge]: [ARDUINO] [CMD #5400] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840965.980525408] [serial_bridge]: [TX #5419] lin=0.140 ang=-0.640 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840966.043761375] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840966.047715236] [serial_bridge]: [ARDUINO] [CMD #5420] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840966.981256193] [serial_bridge]: [TX #5439] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840967.043269427] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840967.053226270] [serial_bridge]: [ARDUINO] [CMD #5440] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840968.030474728] [serial_bridge]: [TX #5460] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840968.043973140] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840968.046717351] [serial_bridge]: [ARDUINO] [CMD #5460] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840969.030571496] [serial_bridge]: [TX #5480] lin=0.140 ang=-0.650 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840969.041977306] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840969.048673204] [serial_bridge]: [ARDUINO] [CMD #5480] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840970.030662049] [serial_bridge]: [TX #5500] lin=0.140 ang=-0.635 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840970.042718155] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840970.048884007] [serial_bridge]: [ARDUINO] [CMD #5500] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840971.030941192] [serial_bridge]: [TX #5520] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840971.046556147] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840971.048113297] [serial_bridge]: [ARDUINO] [CMD #5520] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840972.043633340] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840972.047484683] [serial_bridge]: [ARDUINO] [CMD #5540] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840972.083146926] [serial_bridge]: [TX #5541] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840973.042927410] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840973.047997845] [serial_bridge]: [ARDUINO] [CMD #5560] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840973.133421039] [serial_bridge]: [TX #5562] lin=0.140 ang=-0.650 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840974.042440275] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840974.057203128] [serial_bridge]: [ARDUINO] [CMD #5580] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840974.180774472] [serial_bridge]: [TX #5583] lin=0.140 ang=-0.650 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840975.041680284] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840975.046161412] [serial_bridge]: [ARDUINO] [CMD #5600] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840975.183058079] [serial_bridge]: [TX #5603] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840976.045396422] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840976.048763732] [serial_bridge]: [ARDUINO] [CMD #5620] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840976.230846809] [serial_bridge]: [TX #5624] lin=0.140 ang=-0.657 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840977.044242360] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840977.048487504] [serial_bridge]: [ARDUINO] [CMD #5640] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840977.231988077] [serial_bridge]: [TX #5644] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840978.046393076] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840978.048172837] [serial_bridge]: [ARDUINO] [CMD #5660] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840978.234918888] [serial_bridge]: [TX #5664] lin=0.140 ang=-0.648 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840979.042766222] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840979.050230079] [serial_bridge]: [ARDUINO] [CMD #5680] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840979.281218582] [serial_bridge]: [TX #5685] lin=0.140 ang=-0.635 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840980.047960156] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840980.049695824] [serial_bridge]: [ARDUINO] [CMD #5700] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840980.282307799] [serial_bridge]: [TX #5705] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840981.043246407] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840981.049272690] [serial_bridge]: [ARDUINO] [CMD #5720] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840981.333205859] [serial_bridge]: [TX #5726] lin=0.140 ang=-0.641 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840982.041187812] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840982.048427108] [serial_bridge]: [ARDUINO] [CMD #5740] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840982.381060426] [serial_bridge]: [TX #5747] lin=0.140 ang=-0.635 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840983.047045518] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840983.048308736] [serial_bridge]: [ARDUINO] [CMD #5760] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840983.430580746] [serial_bridge]: [TX #5768] lin=0.140 ang=-0.650 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840984.043382043] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840984.052349650] [serial_bridge]: [ARDUINO] [CMD #5780] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840984.431185745] [serial_bridge]: [TX #5788] lin=0.140 ang=-0.646 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775840985.044520854] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840985.051828052] [serial_bridge]: [ARDUINO] [CMD #5800] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840985.484857195] [serial_bridge]: [TX #5809] lin=0.140 ang=-0.648 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840986.042641154] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840986.046859966] [serial_bridge]: [ARDUINO] [CMD #5820] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840986.530851995] [serial_bridge]: [TX #5830] lin=0.140 ang=-0.607 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840987.042108848] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840987.049474827] [serial_bridge]: [ARDUINO] [CMD #5840] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840987.531546184] [serial_bridge]: [TX #5850] lin=0.140 ang=-0.649 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840988.048456141] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840988.053522007] [serial_bridge]: [ARDUINO] [CMD #5860] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840988.580598069] [serial_bridge]: [TX #5871] lin=0.140 ang=-0.649 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840989.051221629] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840989.052853273] [serial_bridge]: [ARDUINO] [CMD #5880] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840989.580936935] [serial_bridge]: [TX #5891] lin=0.140 ang=-0.611 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775840990.050896832] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840990.054952328] [serial_bridge]: [ARDUINO] [CMD #5900] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840990.581258128] [serial_bridge]: [TX #5911] lin=0.140 ang=-0.655 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840991.042801395] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840991.052578398] [serial_bridge]: [ARDUINO] [CMD #5920] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840991.595582007] [serial_bridge]: [TX #5931] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840992.042394373] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840992.054389449] [serial_bridge]: [ARDUINO] [CMD #5940] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840992.631756384] [serial_bridge]: [TX #5952] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840993.040930956] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840993.048807180] [serial_bridge]: [ARDUINO] [CMD #5960] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840993.636454658] [serial_bridge]: [TX #5972] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840994.046397186] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840994.047970882] [serial_bridge]: [ARDUINO] [CMD #5980] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840994.680683989] [serial_bridge]: [TX #5993] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840995.045189315] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840995.048783752] [serial_bridge]: [ARDUINO] [CMD #6000] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840995.731257060] [serial_bridge]: [TX #6014] lin=0.140 ang=-0.647 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840996.045116179] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840996.047977766] [serial_bridge]: [ARDUINO] [CMD #6020] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840996.781077084] [serial_bridge]: [TX #6035] lin=0.140 ang=-0.653 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840997.042140840] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840997.046455490] [serial_bridge]: [ARDUINO] [CMD #6040] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840997.831051176] [serial_bridge]: [TX #6056] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775840998.041484676] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840998.049319978] [serial_bridge]: [ARDUINO] [CMD #6060] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840998.880726467] [serial_bridge]: [TX #6077] lin=0.140 ang=-0.600 → S42,A132 (bytes: 5334322c413133320a)
+[python3-6] [INFO] [1775840999.044923100] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775840999.048850319] [serial_bridge]: [ARDUINO] [CMD #6080] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775840999.881727509] [serial_bridge]: [TX #6097] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775841000.051584295] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775841000.052859802] [serial_bridge]: [ARDUINO] [CMD #6100] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775841000.882580196] [serial_bridge]: [TX #6117] lin=0.140 ang=-0.652 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775841001.043235182] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775841001.047077383] [serial_bridge]: [ARDUINO] [CMD #6120] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775841001.934373643] [serial_bridge]: [TX #6138] lin=0.140 ang=-0.612 → S42,A133 (bytes: 5334322c413133330a)
+[python3-6] [INFO] [1775841002.049062003] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775841002.050319688] [serial_bridge]: [ARDUINO] [CMD #6140] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775841002.980837070] [serial_bridge]: [TX #6159] lin=0.140 ang=-0.649 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775841003.046189271] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775841003.050324287] [serial_bridge]: [ARDUINO] [CMD #6160] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775841003.981144576] [serial_bridge]: [TX #6179] lin=0.140 ang=-0.650 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775841004.042604088] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775841004.048915294] [serial_bridge]: [ARDUINO] [CMD #6180] raw='S42,A133' ��� speed=42 angle=133 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775841004.982160987] [serial_bridge]: [TX #6199] lin=0.140 ang=-0.636 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775841005.040619980] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775841005.048302560] [serial_bridge]: [ARDUINO] [CMD #6200] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775841006.034083683] [serial_bridge]: [TX #6220] lin=0.140 ang=-0.649 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775841006.050241468] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775841006.054342823] [serial_bridge]: [ARDUINO] [CMD #6220] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775841007.042947667] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775841007.047309935] [serial_bridge]: [ARDUINO] [CMD #6240] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775841007.081226565] [serial_bridge]: [TX #6241] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775841008.042804241] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775841008.050588384] [serial_bridge]: [ARDUINO] [CMD #6260] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775841008.082041548] [serial_bridge]: [TX #6261] lin=0.140 ang=-0.641 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775841009.045669582] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775841009.049437037] [serial_bridge]: [ARDUINO] [CMD #6280] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775841009.082248363] [serial_bridge]: [TX #6281] lin=0.140 ang=-0.640 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775841010.041154836] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775841010.053214311] [serial_bridge]: [ARDUINO] [CMD #6300] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775841010.082289253] [serial_bridge]: [TX #6301] lin=0.140 ang=-0.645 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775841011.053112313] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775841011.054503495] [serial_bridge]: [ARDUINO] [CMD #6320] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775841011.132340919] [serial_bridge]: [TX #6322] lin=0.140 ang=-0.654 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775841012.043572814] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775841012.047839409] [serial_bridge]: [ARDUINO] [CMD #6340] raw='S42,A135' ��� speed=42 angle=135 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775841012.180847775] [serial_bridge]: [TX #6343] lin=0.140 ang=-0.647 → S42,A135 (bytes: 5334322c413133350a)
+[python3-6] [INFO] [1775841013.043614843] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775841013.048678351] [serial_bridge]: [ARDUINO] [CMD #6360] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW
+[python3-6] [INFO] [1775841013.232013411] [serial_bridge]: [TX #6364] lin=0.140 ang=-0.651 → S42,A136 (bytes: 5334322c413133360a)
+[python3-6] [INFO] [1775841014.042566970] [serial_bridge]: [ARDUINO] [PIN] setMotors(42) | DIR1(8)=0 DIR2(10)=0 | TCCR2A=0x21 OCR2A=0 OCR2B=42
+[python3-6] [INFO] [1775841014.046223169] [serial_bridge]: [ARDUINO] [CMD #6380] raw='S42,A136' ��� speed=42 angle=136 FORWARD_DIR=LOW

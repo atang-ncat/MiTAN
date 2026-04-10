@@ -57,12 +57,13 @@ class LaneFollowerNode(Node):
         self.declare_parameter('curve_slowdown_factor', 0.6)  # how much to slow on curves (0=no slowdown, 1=full)
         self.declare_parameter('kp', 0.8)                  # proportional gain
         self.declare_parameter('ki', 0.0)                  # integral gain
-        self.declare_parameter('kd', 0.05)                 # derivative gain
+        self.declare_parameter('kd', 0.20)                 # derivative gain
         self.declare_parameter('max_angular_z', 0.8)       # max steering clamp
-        self.declare_parameter('max_steer_rate', 0.15)     # max steering change per frame (rad/s) — prevents oscillation
+        self.declare_parameter('max_steer_rate', 0.30)     # max steering change per frame (rad/s) — prevents oscillation
         self.declare_parameter('curvature_gain', 0.4)      # how much road curvature biases the steering error
         self.declare_parameter('lane_width_px', 200)       # assumed lane width for single-line fallback
         self.declare_parameter('max_road_width_px', 350)   # max expected road width in pixels — caps road mask to reject floor
+        self.declare_parameter('max_dashed_line_width_px', 20)  # cluster extent above this → solid bold line, not dashed
         self.declare_parameter('scan_row_start', 0.45)     # fraction from top — start of scan region (look further ahead)
         self.declare_parameter('scan_row_end', 0.85)       # fraction from top — end of scan region
         self.declare_parameter('scan_num_rows', 10)        # number of rows to sample in scan region
@@ -70,6 +71,7 @@ class LaneFollowerNode(Node):
         self.declare_parameter('road_fallback_speed', 0.06)  # slower speed when using road-only fallback
         self.declare_parameter('road_lane_bias', 0.65)       # 0.5=road center, 0.65=right lane bias
         self.declare_parameter('enabled', True)            # master enable/disable
+        self.declare_parameter('camera_topic', '/camera/camera/color/image_raw')
 
         # Traffic light parameters (disabled for now — focus on lane following)
         self.declare_parameter('traffic_light_enabled', False)
@@ -99,7 +101,7 @@ class LaneFollowerNode(Node):
         self.prev_error = 0.0
         self.integral_error = 0.0
         self.smoothed_error = 0.0          # EMA-smoothed lateral error
-        self.error_smooth_alpha = 0.15     # EMA factor (0=full smooth, 1=no smooth)
+        self.error_smooth_alpha = 0.35     # base EMA factor (adaptive: goes higher on curves)
         self.prev_steering = 0.0           # for steering rate limiter
         self.last_lane_time = time.time()
         self.last_inference_time = time.time()
@@ -117,9 +119,11 @@ class LaneFollowerNode(Node):
         self.lane_detected_pub = self.create_publisher(Bool, 'hybridnets/lane_detected', 10)
 
         # ── Subscribers ──────────────────────────────────────────────
+        camera_topic = self.get_parameter('camera_topic').value
         self.create_subscription(
-            Image, 'camera/color/image_raw',
+            Image, camera_topic,
             self._image_cb, 1)  # queue=1: drop old frames
+        self.get_logger().info(f'Subscribed to camera topic: {camera_topic}')
 
         self.get_logger().info('Lane follower node ready. Waiting for camera frames...')
 
@@ -163,10 +167,12 @@ class LaneFollowerNode(Node):
         raw_error, guidance_found, guidance_source, center_points = lane_info
         self._last_guidance_source = guidance_source
 
-        # Smooth the error with EMA to prevent jitter / drift
+        # Adaptive EMA: respond fast when error changes a lot (curves),
+        # stay smooth when error is stable (straights).
         if guidance_found:
-            self.smoothed_error = (self.error_smooth_alpha * raw_error +
-                                  (1.0 - self.error_smooth_alpha) * self.smoothed_error)
+            change = abs(raw_error - self.smoothed_error)
+            alpha = min(0.85, self.error_smooth_alpha + change * 3.0)
+            self.smoothed_error = alpha * raw_error + (1.0 - alpha) * self.smoothed_error
         error = self.smoothed_error
 
         # Publish lane detection status
@@ -228,13 +234,22 @@ class LaneFollowerNode(Node):
             return None
         return cv2.resize(cropped, (w_orig, h_orig), interpolation=cv2.INTER_NEAREST)
 
-    def _classify_lane_color(self, img_hsv, pixel_xs, y):
-        """Classify a cluster of lane pixels as 'yellow' (center line) or 'white' (edge).
+    def _classify_lane_color(self, img_hsv, pixel_xs, y,
+                             max_line_width=0):
+        """Classify a cluster of lane pixels by colour and line type.
 
-        Samples HSV values from the original image at lane mask locations.
-        On the black road surface the two colors separate cleanly:
-            Yellow  →  H ∈ [15, 40], S > 80, V > 80
-            White   →  S < 60, V > 140
+        Returns one of:
+            'yellow'      — center line (solid yellow)
+            'white'       — dashed/thin white lane marking (true boundary)
+            'white_bold'  — solid wide white line/curb (NOT a lane boundary;
+                            following it at corners leads off-track)
+            'unknown'     — can't determine colour
+
+        When *max_line_width* > 0, a white cluster whose spatial extent
+        exceeds the threshold is classified as 'white_bold' instead of
+        'white'.  This prevents the car from steering towards thick curb
+        edges or crosswalk markings that go straight at corners while the
+        actual dashed lane line curves with the road.
         """
         if img_hsv is None or len(pixel_xs) == 0:
             return 'unknown'
@@ -253,21 +268,53 @@ class LaneFollowerNode(Node):
         if avg_s > 80 and 15 < avg_h < 40 and avg_v > 80:
             return 'yellow'
         if avg_s < 60 and avg_v > 140:
+            extent = int(pixel_xs[-1]) - int(pixel_xs[0])
+            if max_line_width > 0 and extent > max_line_width:
+                return 'white_bold'
             return 'white'
         return 'unknown'
 
+    def _is_dashed_line(self, lane_orig, cluster_x_center, y, window=40):
+        """Check if a lane line at (cluster_x_center, y) is dashed.
+
+        Scans a vertical strip around the x-position and counts how
+        many rows have lane-mask pixels.  Dashed lines have physical
+        gaps → intermittent pixels; solid/bold lines are continuous.
+
+        Returns True if dashed (fill_ratio < 0.5), False if solid.
+        """
+        if lane_orig is None:
+            return False
+
+        h, w = lane_orig.shape[:2]
+        x_c = int(cluster_x_center)
+        x_left = max(0, x_c - 5)
+        x_right = min(w, x_c + 6)
+
+        y_start = max(0, y - window)
+        y_end = min(h, y + window + 1)
+
+        total_rows = y_end - y_start
+        if total_rows < 10:
+            return False
+
+        strip = lane_orig[y_start:y_end, x_left:x_right]
+        rows_with_pixels = int(np.any(strip > 0, axis=1).sum())
+        fill_ratio = rows_with_pixels / total_rows
+        return fill_ratio < 0.5
+
     def _extract_lane_center(self, img_bgr, lane_mask, road_mask,
                              ratio, dw, dh, w_orig, h_orig):
-        """Color-identified lane following.
+        """Two-pass lane following: yellow line ONLY, white line ONLY as fallback.
 
-        Tier 1:  Two lane-line clusters visible → midpoint between them.
-        Tier 2:  Single cluster, colour known →
-                     yellow (center line) → drive to its RIGHT
-                     white  (edge line)   → drive to its LEFT
-        Tier 2b: Single cluster, colour unknown → use road-edge context to
-                 decide which side the line is on, then offset accordingly.
-        Tier 3:  No lane lines, road mask visible → right-lane-biased position.
-        Tier 4:  Nothing → not found.
+        Pass 1: Scan all rows, collect yellow and white line positions separately.
+        Pass 2: Decide GLOBALLY which source to use:
+            - If yellow was found in ANY row → use ONLY yellow-based points
+            - If yellow was found in ZERO rows → use right white line
+            - If neither → road mask fallback
+
+        This prevents white-line points from contaminating the path when
+        yellow is visible but intermittent (e.g. at corners).
 
         Returns (error, guidance_found, guidance_source, center_points).
         """
@@ -280,228 +327,174 @@ class LaneFollowerNode(Node):
 
         image_cx = w_orig / 2.0
 
+        # ── Map masks to original image space ────────────────────
         lane_orig = self._mask_to_original(lane_mask, dw, dh, w_orig, h_orig)
         road_orig = self._mask_to_original(road_mask, dw, dh, w_orig, h_orig)
 
-        # ── Cap road mask width to reject floor outside the track ────
-        # The Quanser lab floor has similar colour/texture to the track,
-        # so HybridNets often segments it as "drivable."  Capping the
-        # mask width discards everything beyond the expected track width.
-        if road_orig is not None:
-            # Fully vectorised road width cap (no Python loop)
-            road_any = (road_orig > 0)
-            row_has_road = road_any.any(axis=1)
-            if row_has_road.any():
-                # For each row, find leftmost and rightmost road pixel
-                col_indices = np.arange(w_orig)
-                # Broadcast: road_any[y, x] * col_indices[x] → 0 where no road
-                # Use masked operations for left/right edge
-                masked = np.where(road_any, col_indices[np.newaxis, :], w_orig)
-                left_edges = masked.min(axis=1)  # leftmost road pixel per row
-                masked_r = np.where(road_any, col_indices[np.newaxis, :], -1)
-                right_edges = masked_r.max(axis=1)  # rightmost road pixel per row
-                widths = right_edges - left_edges
-                too_wide = row_has_road & (widths > max_road_w)
-                if too_wide.any():
-                    mids = (left_edges[too_wide] + right_edges[too_wide]) // 2
-                    new_left = np.maximum(0, mids - max_road_w // 2)
-                    new_right = np.minimum(w_orig - 1, mids + max_road_w // 2)
-                    wide_rows = np.where(too_wide)[0]
-                    for i, y_cap in enumerate(wide_rows):
-                        road_orig[y_cap, :new_left[i]] = 0
-                        road_orig[y_cap, new_right[i]:] = 0
+        # ── HSV for yellow detection ─────────────────────────────
+        img_hsv = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2HSV)
 
-        img_hsv = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2HSV) \
-            if lane_orig is not None else None
+        # Direct HSV yellow mask (catches yellow even if lane mask misses it)
+        yellow_hsv_mask = cv2.inRange(
+            img_hsv,
+            np.array([15, 80, 80], dtype=np.uint8),
+            np.array([40, 255, 255], dtype=np.uint8))
+        yellow_hsv_mask = cv2.morphologyEx(
+            yellow_hsv_mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
 
+        # ── Viz storage ──────────────────────────────────────────
+        self._viz_yellow_pts = []
+        self._viz_dashed_white_pts = []
+        self._viz_solid_white_pts = []
+
+        row_start = int(h_orig * scan_start)
+        row_end = int(h_orig * scan_end)
+        row_step = max(1, (row_end - row_start) // num_rows)
+
+        # ══════════════════════════════════════════════════════════
+        # PASS 1: Scan all rows — collect yellow and white separately
+        # ══════════════════════════════════════════════════════════
+        yellow_rows = []   # list of (yellow_x, y)
+        white_rows = []    # list of (rightmost_white_x, y)
+
+        for y in range(row_start, row_end, row_step):
+            # ── Gather lane-mask pixels at this row ──────────
+            if lane_orig is not None:
+                lane_px = np.where(lane_orig[y, :] > 0)[0]
+            else:
+                lane_px = np.array([], dtype=int)
+
+            # Also gather HSV-yellow pixels (union with lane mask)
+            yellow_px = np.where(yellow_hsv_mask[y, :] > 0)[0]
+            if len(yellow_px) >= 3 and len(lane_px) > 0:
+                combined = np.union1d(lane_px, yellow_px)
+            elif len(yellow_px) >= 3:
+                combined = yellow_px
+            else:
+                combined = lane_px
+
+            # ── Cluster into separate line segments ──────────
+            clusters = []
+            if len(combined) >= 2:
+                gaps = np.diff(combined)
+                splits = np.where(gaps > 15)[0]
+                raw_cls = (np.split(combined, splits + 1)
+                           if len(splits) else [combined])
+                clusters = [cl for cl in raw_cls if len(cl) >= 2]
+
+            # ── Classify each cluster: yellow or white ───────
+            yellow_x = None
+            white_xs = []
+
+            for cl in clusters:
+                cl_center = float(np.median(cl))
+                color = self._classify_lane_color(img_hsv, cl, y)
+
+                if color == 'yellow':
+                    yellow_x = cl_center
+                    self._viz_yellow_pts.append((int(cl_center), y))
+                else:
+                    white_xs.append(cl_center)
+                    self._viz_solid_white_pts.append((int(cl_center), y))
+
+            # Store results per row
+            if yellow_x is not None:
+                yellow_rows.append((yellow_x, y))
+
+            if white_xs:
+                right_white_x = max(white_xs)
+                white_rows.append((right_white_x, y))
+
+        # ══════════════════════════════════════════════════════════
+        # PASS 2: Decide GLOBALLY — yellow or white (never mix)
+        # ══════════════════════════════════════════════════════════
         center_points = []
         dominant_src = 'none'
 
-        # ── Tier 1 & 2: Scan for lane lines ──────────────────────────
-        if lane_orig is not None:
-            row_start = int(h_orig * scan_start)
-            row_end = int(h_orig * scan_end)
-            row_step = max(1, (row_end - row_start) // num_rows)
-
-            for y in range(row_start, row_end, row_step):
-                lane_pixels = np.where(lane_orig[y, :] > 0)[0]
-                if len(lane_pixels) < 3:
-                    continue
-
-                # ── Layer 1: Filter lane pixels outside drivable area ─
-                # At corners the bold straight white line diverges from
-                # the road; removing pixels outside the road mask keeps
-                # only the dotted curve lines that follow the actual turn.
-                if road_orig is not None:
-                    road_row = road_orig[y, :]
-                    inside_road = road_row[lane_pixels] > 0
-                    # Allow a small margin (8 px) outside the road edge
-                    # so lines right at the boundary are kept.
-                    if np.any(inside_road):
-                        rp = np.where(road_row > 0)[0]
-                        if len(rp) > 0:
-                            road_left = rp[0] - 8
-                            road_right = rp[-1] + 8
-                            lane_pixels = lane_pixels[
-                                (lane_pixels >= road_left) &
-                                (lane_pixels <= road_right)]
-                    if len(lane_pixels) < 3:
-                        continue
-
-                gaps = np.diff(lane_pixels)
-                gap_threshold = w_orig * 0.12
-                large_gaps = np.where(gaps > gap_threshold)[0]
-
-                if len(large_gaps) >= 1:
-                    # ── Two clusters ──────────────────────────────
-                    split = large_gaps[np.argmax(gaps[large_gaps])]
-                    left_px = lane_pixels[:split + 1]
-                    right_px = lane_pixels[split + 1:]
-                    left_med = float(np.median(left_px))
-                    right_med = float(np.median(right_px))
-
-                    # ── Layer 2: Lane width sanity check ──────────
-                    # If the gap between clusters is much wider than
-                    # expected lane width, we're probably spanning
-                    # across the dotted curve line AND the bold
-                    # straight line.  In that case, pick the pair
-                    # whose right cluster is closest to the road
-                    # mask right edge (the actual lane boundary).
-                    cluster_gap = right_med - left_med
-                    max_expected = lane_half_w * 2.0 * 1.5  # 1.5× lane width
-
-                    if cluster_gap > max_expected and road_orig is not None:
-                        rp = np.where(road_orig[y, :] > 0)[0]
-                        if len(rp) > 20:
-                            road_right_edge = float(rp[-1])
-                            # If right cluster is far from road edge,
-                            # it might be the bold outer line.  Check
-                            # if there's a third cluster in between.
-                            all_splits = large_gaps
-                            if len(all_splits) >= 2:
-                                # 3+ clusters: pick the two innermost
-                                # (i.e. closest pair straddling the road)
-                                segments = []
-                                prev = 0
-                                for si in all_splits:
-                                    segments.append(lane_pixels[prev:si + 1])
-                                    prev = si + 1
-                                segments.append(lane_pixels[prev:])
-
-                                # Find best pair: smallest gap that
-                                # still straddles the expected lane center
-                                best_pair = None
-                                best_gap = float('inf')
-                                for i in range(len(segments) - 1):
-                                    lm = float(np.median(segments[i]))
-                                    rm = float(np.median(segments[i + 1]))
-                                    g = rm - lm
-                                    if g < best_gap:
-                                        best_gap = g
-                                        best_pair = (lm, rm)
-                                if best_pair is not None:
-                                    left_med, right_med = best_pair
-                            else:
-                                # Only 2 clusters but too wide:
-                                # Clamp right boundary to road edge
-                                right_med = min(right_med,
-                                                road_right_edge)
-
-                    center_x = (left_med + right_med) / 2.0
-                    dominant_src = 'two_lanes'
-                else:
-                    # ── Single cluster — identify by colour ───────
-                    cluster_med = float(np.median(lane_pixels))
-                    color = self._classify_lane_color(img_hsv, lane_pixels, y)
-
-                    if color == 'yellow':
-                        center_x = cluster_med + lane_half_w
-                        if dominant_src not in ('two_lanes',):
-                            dominant_src = 'yellow_line'
-                    elif color == 'white':
-                        center_x = cluster_med - lane_half_w
-                        if dominant_src not in ('two_lanes',):
-                            dominant_src = 'white_line'
-                    else:
-                        # Unknown colour — use road edges for context
-                        center_x = self._offset_unknown_line(
-                            cluster_med, y, road_orig, image_cx, lane_half_w)
-                        if dominant_src == 'none':
-                            dominant_src = 'one_lane'
-
+        if len(yellow_rows) > 0:
+            # ── YELLOW FOUND → use ONLY yellow, ignore white entirely ──
+            dominant_src = 'yellow_line'
+            for (yx, y) in yellow_rows:
+                depth_ratio = (y - row_start) / max(1, row_end - row_start)
+                # Offset: drive to the right of yellow, centered in lane
+                offset = lane_half_w * (0.35 + 0.35 * depth_ratio)
+                center_x = yx + offset
                 center_points.append((int(center_x), y))
 
+        elif len(white_rows) > 0:
+            # ── NO YELLOW AT ALL → use right white line as boundary ──
+            dominant_src = 'white_line'
+            for (wx, y) in white_rows:
+                depth_ratio = (y - row_start) / max(1, row_end - row_start)
+                # Larger offset: stay well to the left of the white edge
+                offset = lane_half_w * (0.3 + 0.4 * depth_ratio)
+                center_x = wx - offset
+                center_points.append((int(center_x), y))
+
+        else:
+            # ── NEITHER → road mask fallback ──
+            for y in range(row_start, row_end, row_step):
+                if road_orig is not None:
+                    rp = np.where(road_orig[y, :] > 0)[0]
+                    if len(rp) > 20:
+                        rl, rr = float(rp[0]), float(rp[-1])
+                        road_w = rr - rl
+                        if road_w > max_road_w:
+                            rcx = (rl + rr) / 2.0
+                            rl = rcx - max_road_w / 2.0
+                            rr = rcx + max_road_w / 2.0
+                        center_x = rl + (road_w * road_bias)
+                        center_points.append((int(center_x), y))
+            if center_points:
+                dominant_src = 'road_right_lane'
+
+        # ── Smooth center path (quadratic fit to preserve curves) ───
+        if len(center_points) >= 3:
+            raw_ys = np.array([p[1] for p in center_points], dtype=np.float32)
+            raw_xs = np.array([p[0] for p in center_points], dtype=np.float32)
+            deg = min(2, len(center_points) - 1)
+            coeffs = np.polyfit(raw_ys, raw_xs, deg)
+            smooth_xs = np.polyval(coeffs, raw_ys)
+            center_points = [(int(sx), int(sy))
+                             for sx, sy in zip(smooth_xs, raw_ys)]
+
+        # ── Compute lateral error (look-ahead weighted) ──────────
         if len(center_points) > 0:
-            # Weight top (further ahead) rows MORE so the vehicle
-            # anticipates curves instead of only reacting when close.
-            weights = np.arange(len(center_points), 0, -1, dtype=np.float32)
-            cx_vals = np.array([p[0] for p in center_points], dtype=np.float32)
+            # Weight earlier (top) rows more → anticipate curves
+            weights = np.arange(len(center_points), 0, -1,
+                                dtype=np.float32)
+            cx_vals = np.array([p[0] for p in center_points],
+                               dtype=np.float32)
             avg_cx = float(np.average(cx_vals, weights=weights))
 
-            # ── Curvature detection ──────────────────────────────
-            # Measure how the lane center shifts from bottom (near)
-            # to top (far).  If top points are left of bottom, the
-            # road curves left and we should steer earlier.
-            curvature_gain = self.get_parameter('curvature_gain').value
-            if len(center_points) >= 4:
-                n = len(center_points)
-                top_cx = np.mean(cx_vals[:n // 3])       # far ahead
-                bot_cx = np.mean(cx_vals[2 * n // 3:])   # close
-                # Positive curvature = road curves left (top is left of bottom)
-                curvature = (bot_cx - top_cx) / (w_orig / 2.0)
-            else:
-                curvature = 0.0
-
-            # Clamp inside the drivable area (with road width cap)
-            if road_orig is not None:
-                scan_y = center_points[-1][1]
-                rp = np.where(road_orig[scan_y, :] > 0)[0]
-                if len(rp) > 10:
-                    rl, rr = float(rp[0]), float(rp[-1])
-                    road_w = rr - rl
-                    if road_w > max_road_w:
-                        road_cx_here = (rl + rr) / 2.0
-                        rl = road_cx_here - max_road_w / 2.0
-                        rr = road_cx_here + max_road_w / 2.0
-                    avg_cx = np.clip(avg_cx, rl + 10, rr - 10)
-
-            error = float(np.clip((avg_cx - image_cx) / (w_orig / 2.0),
-                                  -1.0, 1.0))
-            # Add curvature bias: steer into the curve earlier
-            error = float(np.clip(error - curvature * curvature_gain,
-                                  -1.0, 1.0))
+            error = float(np.clip(
+                (avg_cx - image_cx) / (w_orig / 2.0), -1.0, 1.0))
             return error, True, dominant_src, center_points
 
-        # ── Tier 3: Road mask — right-lane biased ────────────────────
-        if road_orig is not None:
-            row_start = int(h_orig * scan_start)
-            row_end = int(h_orig * scan_end)
-            row_step = max(1, (row_end - row_start) // max(1, num_rows // 2))
-
-            road_centers = []
-            for y in range(row_start, row_end, row_step):
-                rp = np.where(road_orig[y, :] > 0)[0]
-                if len(rp) > 20:
-                    rl, rr = float(rp[0]), float(rp[-1])
-                    # Cap road width to reject floor areas outside track
-                    road_w = rr - rl
-                    if road_w > max_road_w:
-                        road_cx_here = (rl + rr) / 2.0
-                        rl = road_cx_here - max_road_w / 2.0
-                        rr = road_cx_here + max_road_w / 2.0
-                    road_cx = rl + (rr - rl) * road_bias
-                    road_centers.append((int(road_cx), y))
-
-            if len(road_centers) > 0:
-                weights = np.arange(1, len(road_centers) + 1, dtype=np.float32)
-                cx_vals = np.array([p[0] for p in road_centers], dtype=np.float32)
-                avg_cx = float(np.average(cx_vals, weights=weights))
-                error = float(np.clip((avg_cx - image_cx) / (w_orig / 2.0),
-                                      -1.0, 1.0))
-                return error, True, 'road_right_lane', road_centers
-
-        # ── Tier 4: Nothing found ────────────────────────────────────
+        # ── Nothing found ────────────────────────────────────────
         return 0.0, False, 'none', []
+
+
+    def _validate_center_line(self, med_x, road_orig, y,
+                              max_dist_ratio=0.6):
+        """Return True if a cluster looks like a genuine center line.
+
+        The yellow center tape should be near the MIDDLE of the road, not
+        at the edge.  Under warm lighting the beige curb surface can have
+        HSV values that fall in the yellow range, so a 'yellow' cluster
+        near the road edge is almost certainly a curb edge — not the tape.
+        """
+        if road_orig is None:
+            return True
+        rp = np.where(road_orig[y, :] > 0)[0]
+        if len(rp) <= 20:
+            return True
+        rl, rr = float(rp[0]), float(rp[-1])
+        road_hw = (rr - rl) / 2.0
+        if road_hw <= 0:
+            return True
+        road_cx = (rl + rr) / 2.0
+        return abs(med_x - road_cx) / road_hw <= max_dist_ratio
 
     def _offset_unknown_line(self, cluster_x, y, road_orig, image_cx, offset):
         """When lane colour can't be determined, use road edges to decide
@@ -628,21 +621,38 @@ class LaneFollowerNode(Node):
             overlay[lane_orig == 1] = SEG_COLORS['lane']
             result = cv2.addWeighted(result, 0.6, overlay, 0.4, 0)
 
-        # Draw lane center points
-        for i, (cx, cy) in enumerate(center_points):
-            cv2.circle(result, (cx, cy), 6, (0, 255, 255), -1)  # yellow dots
-            if i > 0:
-                px, py = center_points[i - 1]
-                cv2.line(result, (px, py), (cx, cy), (0, 255, 255), 2)
+        # Draw image center reference (thin dashed-style)
+        for dy in range(0, h, 12):
+            cv2.line(result, (w // 2, dy), (w // 2, min(dy + 6, h)),
+                     (180, 180, 180), 1, cv2.LINE_AA)
 
-        # Draw image center line
-        cv2.line(result, (w // 2, 0), (w // 2, h), (255, 255, 255), 1)
+        # Draw lane-center path and target marker
+        if len(center_points) >= 2:
+            pts = np.array(center_points, dtype=np.int32)
+            # Smooth polyline through scan points (glow + core)
+            cv2.polylines(result, [pts], False, (0, 140, 140), 5, cv2.LINE_AA)
+            cv2.polylines(result, [pts], False, (0, 255, 255), 2, cv2.LINE_AA)
+            # Small dots at each scan point
+            for (cx, cy) in center_points:
+                cv2.circle(result, (cx, cy), 3, (0, 255, 255), -1, cv2.LINE_AA)
 
-        # Draw lane center target line
+        # Draw yellow line detections only (skip white/unknown noise dots)
+        for (cx, cy) in getattr(self, '_viz_yellow_pts', []):
+            cv2.circle(result, (cx, cy), 4, (0, 255, 255), -1, cv2.LINE_AA)
+
+        # Target crosshair at weighted aim point
         if center_points:
-            avg_cx = int(np.mean([p[0] for p in center_points]))
-            cv2.line(result, (avg_cx, int(h * 0.5)), (avg_cx, int(h * 0.9)),
-                     (0, 255, 255), 3)
+            weights = np.arange(len(center_points), 0, -1, dtype=np.float32)
+            aim_x = int(np.average(
+                [p[0] for p in center_points], weights=weights))
+            aim_y = center_points[-1][1]   # bottom scan row
+            sz = 10
+            cv2.line(result, (aim_x - sz, aim_y), (aim_x + sz, aim_y),
+                     (0, 220, 255), 2, cv2.LINE_AA)
+            cv2.line(result, (aim_x, aim_y - sz), (aim_x, aim_y + sz),
+                     (0, 220, 255), 2, cv2.LINE_AA)
+            cv2.circle(result, (aim_x, aim_y), sz,
+                       (0, 220, 255), 2, cv2.LINE_AA)
 
         # Status text with guidance source
         source_info = getattr(self, '_last_guidance_source', 'none')
