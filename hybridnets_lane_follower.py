@@ -23,7 +23,7 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
 from geometry_msgs.msg import Twist
-from std_msgs.msg import Bool
+from std_msgs.msg import Bool, String, Float32
 
 # Add the hybridnets_deploy directory to the path
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -117,6 +117,8 @@ class LaneFollowerNode(Node):
         self.cmd_pub = self.create_publisher(Twist, 'cmd_vel_auto', 10)
         self.vis_pub = self.create_publisher(Image, 'hybridnets/visualization', 1)
         self.lane_detected_pub = self.create_publisher(Bool, 'hybridnets/lane_detected', 10)
+        self.guidance_source_pub = self.create_publisher(String, 'hybridnets/guidance_source', 10)
+        self.road_width_pub = self.create_publisher(Float32, 'hybridnets/road_width', 10)
 
         # ── Subscribers ──────────────────────────────────────────────
         camera_topic = self.get_parameter('camera_topic').value
@@ -179,6 +181,11 @@ class LaneFollowerNode(Node):
         lane_msg = Bool()
         lane_msg.data = guidance_found
         self.lane_detected_pub.publish(lane_msg)
+
+        # Publish guidance source for intersection controller
+        src_msg = String()
+        src_msg.data = guidance_source
+        self.guidance_source_pub.publish(src_msg)
 
         # Compute and publish steering command
         cmd = Twist()
@@ -417,7 +424,7 @@ class LaneFollowerNode(Node):
             for (yx, y) in yellow_rows:
                 depth_ratio = (y - row_start) / max(1, row_end - row_start)
                 # Offset: drive to the right of yellow, centered in lane
-                offset = lane_half_w * (0.35 + 0.35 * depth_ratio)
+                offset = lane_half_w * (0.40 + 0.30 * depth_ratio)
                 center_x = yx + offset
                 center_points.append((int(center_x), y))
 
@@ -447,6 +454,18 @@ class LaneFollowerNode(Node):
                         center_points.append((int(center_x), y))
             if center_points:
                 dominant_src = 'road_right_lane'
+
+        # ── Measure and publish road width (for intersection detection) ──
+        road_widths = []
+        for y in range(row_start, row_end, row_step):
+            if road_orig is not None:
+                rp = np.where(road_orig[y, :] > 0)[0]
+                if len(rp) > 20:
+                    road_widths.append(float(rp[-1]) - float(rp[0]))
+        avg_road_width = float(np.mean(road_widths)) if road_widths else 0.0
+        rw_msg = Float32()
+        rw_msg.data = avg_road_width
+        self.road_width_pub.publish(rw_msg)
 
         # ── Smooth center path (quadratic fit to preserve curves) ───
         if len(center_points) >= 3:

@@ -14,15 +14,24 @@ Real-time autonomous lane-following system for the **Yahboom Ackermann** vehicle
 │             │────▶│  HybridNets  │────▶│  Lane Follower  │
 │             │     │  (TensorRT)  │     │  (PID Control)  │
 │             │     │              │     └────────┬────────┘
-│             │     │ Lane Lines   │              │ /cmd_vel_auto
-│             │     │ Road Seg.    │     ┌────────▼────────┐
-│             │     │ Detections   │     │  cmd_vel_mux    │
-│             │     └──────────────┘     │  (gamepad prio) │
-└─────────────┘                          └────────┬────────┘
-                                                  │ /cmd_vel
-┌─────────────┐     ┌──────────────┐     ┌────────▼────────┐
-│  RPLiDAR A3 │────▶│  slam_toolbox│     │  serial_bridge  │──▶ Arduino
-└─────────────┘     └──────────────┘     └─────────────────┘
+│             │     │ Lane Lines   │     /cmd_vel_auto    │
+│             │     │ Road Seg.    │     guidance_source  │
+│             │     │ Detections   │     road_width       │
+│             │     └──────────────┘              │
+└─────────────┘              ┌─────────────────────┘
+                             │
+┌────────────────────────────▼───────────────────────────────┐
+│  Intersection Controller (state machine)                   │
+│  /cmd_vel_intersection                                     │
+└────────────────────────────────────────────────────────────┘
+                             │
+┌────────────────────────────▼───────────────────────────────┐
+│  cmd_vel_mux (teleop > intersection > auto)                │
+└────────────────────────────┬───────────────────────────────┘
+                             │ /cmd_vel
+┌─────────────┐     ┌───────▼─────────┐
+│  RPLiDAR A3 │     │  serial_bridge  │──▶ Arduino
+└─────────────┘     └─────────────────┘
 ```
 
 ## Hardware
@@ -64,15 +73,17 @@ Input: 384 × 640 (H × W) · ONNX opset 18 · TensorRT FP16
 
 | File | Description |
 |---|---|
-| `lane_follow.launch.py` | **Lane-following stack** (camera + HybridNets + mux + serial) |
+| `lane_follow.launch.py` | **Lane-following + intersection stack** (camera + HybridNets + intersection + mux + serial) |
 | `vslam_yolov10_realsense.launch.py` | Perception stack (VSLAM + YOLOv10 + LiDAR + SLAM) |
 | `teleop.launch.py` | Gamepad teleop (joy + serial bridge) |
 | `hybridnets_lane_follower.py` | Lane-following ROS 2 node (two-pass guidance + PID control) |
-| `cmd_vel_mux.py` | Priority-based velocity mux (teleop > autonomous) |
+| `intersection_controller.py` | **Intersection navigation** (state-machine + timed maneuvers) |
+| `cmd_vel_mux.py` | Priority-based velocity mux (teleop > intersection > autonomous) |
 | `serial_bridge.py` | ROS 2 → Arduino serial bridge (`S<speed>,A<angle>`) |
 | `hybridnets_deploy/` | HybridNets model, config, TRT conversion, inference code |
 | `ackermann_drive/` | Arduino firmware for Yahboom chassis |
 | `LANE_FOLLOWING_LOGIC.md` | Detailed lane-following algorithm documentation |
+| `INTERSECTION_NAVIGATION.md` | **Intersection navigation system documentation** |
 | `DRIVING_AND_MAPPING.md` | Guide for mapping with gamepad + SLAM |
 
 ## Quick Start — Lane Following
@@ -205,6 +216,9 @@ ros2 param set /hybridnets_lane_follower kp 1.0
 - [x] Curve speed reduction
 - [x] cmd_vel mux with gamepad override
 - [x] Live track validation and tuning
+- [x] Intersection navigation controller (state machine)
+- [x] 3-level cmd_vel mux (teleop > intersection > auto)
+- [ ] Intersection maneuver field tuning
 - [ ] Traffic light response (re-enable after tuning)
 - [ ] Nav2 integration with lane constraints
 - [ ] Depth-based obstacle avoidance

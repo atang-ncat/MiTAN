@@ -1,5 +1,6 @@
 # Lane-Following Launch File
-# Launches HybridNets lane follower + RealSense camera + serial bridge + gamepad override
+# Launches HybridNets lane follower + intersection controller + RealSense camera
+# + serial bridge + gamepad override
 #
 # Usage:
 #   ros2 launch lane_follow.launch.py
@@ -7,6 +8,7 @@
 # Optional overrides:
 #   serial_port:=/dev/ttyACM1
 #   cruise_speed:=0.2
+#   maneuver_sequence:="right,straight,left"
 
 import os
 import launch
@@ -31,6 +33,12 @@ def generate_launch_description():
     cruise_speed_arg = DeclareLaunchArgument(
         'cruise_speed', default_value='0.20',
         description='Autonomous cruising speed (m/s)')
+    maneuver_sequence_arg = DeclareLaunchArgument(
+        'maneuver_sequence', default_value='right,straight,left',
+        description='Intersection maneuver sequence (comma-separated: right,straight,left)')
+    intersection_enabled_arg = DeclareLaunchArgument(
+        'intersection_enabled', default_value='true',
+        description='Enable intersection controller')
 
 
     # ── RealSense Camera ──────────────────────────────────────────
@@ -111,19 +119,34 @@ def generate_launch_description():
         output='screen',
     )
 
+    # ── Intersection Controller ───────────────────────────────────
+    intersection_controller = launch.actions.ExecuteProcess(
+        cmd=[
+            'python3',
+            os.path.join(SCRIPT_DIR, 'intersection_controller.py'),
+            '--ros-args',
+            '-p', ['enabled:=', LaunchConfiguration('intersection_enabled')],
+            '-p', ['maneuver_sequence:=', LaunchConfiguration('maneuver_sequence')],
+        ],
+        output='screen',
+    )
+
     return launch.LaunchDescription([
         serial_port_arg,
         max_speed_arg,
         cruise_speed_arg,
-
+        maneuver_sequence_arg,
+        intersection_enabled_arg,
 
         LogInfo(msg='\n========================================'),
         LogInfo(msg='  HybridNets Lane Following Stack'),
+        LogInfo(msg='  + Intersection Navigation Controller'),
         LogInfo(msg='  Hold LB for gamepad override'),
         LogInfo(msg='========================================\n'),
 
         realsense_node,
         lane_follower,
+        intersection_controller,
         cmd_vel_mux,
         joy_node,
         teleop_twist_joy_node,
