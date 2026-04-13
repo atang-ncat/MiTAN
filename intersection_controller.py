@@ -78,7 +78,7 @@ class IntersectionController(Node):
         # Recovery and cooldown
         self.declare_parameter('recovery_timeout', 5.0)                 # max seconds in RECOVERING
         self.declare_parameter('recovery_speed', 0.10)                  # forward speed while recovering
-        self.declare_parameter('sustained_yellow_time', 2.0)            # seconds yellow must be seen continuously before recovery
+        self.declare_parameter('sustained_yellow_time', 0.3)            # seconds yellow must be seen continuously before recovery
         self.declare_parameter('cooldown_time', 10.0)                   # min seconds between intersection triggers
         self.declare_parameter('lead_in_time', 1.0)                     # seconds to drive straight before turning
 
