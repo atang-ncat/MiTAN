@@ -67,10 +67,10 @@ class IntersectionController(Node):
         self.declare_parameter('maneuver_speed', 0.20)                  # m/s forward speed during maneuver
 
         self.declare_parameter('right_steering', -0.43)                 # angular.z for right turn (servo 121)
-        self.declare_parameter('right_duration', 3.5)                   # seconds (from Arduino RIGHT_ACTION_DURATION)
+        self.declare_parameter('right_duration', 2.5)                   # seconds for right turn
 
         self.declare_parameter('straight_steering', 0.0)                # angular.z for straight (servo 92)
-        self.declare_parameter('straight_duration', 3.0)                # seconds (from Arduino STRAIGHT_ACTION_DURATION)
+        self.declare_parameter('straight_duration', 2.5)                # seconds — push through entire confusing zone
 
         self.declare_parameter('left_steering', 0.25)                   # angular.z for left turn (servo 74)
         self.declare_parameter('left_duration', 3.5)                    # seconds (from Arduino LEFT_ACTION_DURATION)
@@ -204,8 +204,11 @@ class IntersectionController(Node):
             self._transition_to(IntersectionState.LANE_FOLLOWING)
             return
 
-        # Start the maneuver immediately (debounce already happened in LANE_FOLLOWING)
+        # Determine next maneuver
         maneuver = self._get_next_maneuver()
+
+
+        # Start the maneuver immediately (debounce already happened in LANE_FOLLOWING)
         self.get_logger().info(f'🚗 Executing intersection maneuver: {maneuver.upper()}')
         self.maneuver_start_time = now
         self._current_maneuver = maneuver
@@ -248,15 +251,24 @@ class IntersectionController(Node):
 
             self.cmd_pub.publish(cmd)
         else:
-            # Maneuver complete — transition to recovery
-            self.get_logger().info(
-                f'✅ Maneuver {maneuver.upper()} complete '
-                f'({elapsed:.1f}s) — entering recovery')
-            self.recovery_start_time = now
+            # Maneuver complete
             self.last_intersection_time = now  # Start cooldown
-            self._yellow_sustained_start = 0.0  # Reset sustained tracker
             self._advance_sequence()
-            self._transition_to(IntersectionState.RECOVERING)
+
+            # Straight maneuver: car is already aligned, skip recovery
+            if maneuver == 'straight':
+                self.get_logger().info(
+                    f'✅ Maneuver STRAIGHT complete '
+                    f'({elapsed:.1f}s) — resuming lane following (no recovery needed)')
+                self._transition_to(IntersectionState.LANE_FOLLOWING)
+            else:
+                # Turns need recovery to re-find yellow line
+                self.get_logger().info(
+                    f'✅ Maneuver {maneuver.upper()} complete '
+                    f'({elapsed:.1f}s) — entering recovery')
+                self.recovery_start_time = now
+                self._yellow_sustained_start = 0.0
+                self._transition_to(IntersectionState.RECOVERING)
 
     def _tick_recovering(self, now):
         """Drive forward slowly, looking for sustained yellow line re-acquisition."""
@@ -321,8 +333,7 @@ class IntersectionController(Node):
         # But NOT when cancelling a false-alarm from INTERSECTION_DETECTED —
         # that was only 1 tick, no need to brake.
         if new_state == IntersectionState.LANE_FOLLOWING and \
-           old_state in (IntersectionState.EXECUTING_MANEUVER,
-                         IntersectionState.RECOVERING):
+           old_state == IntersectionState.EXECUTING_MANEUVER:
             cmd = Twist()
             cmd.linear.x = 0.0
             cmd.angular.z = 0.0
