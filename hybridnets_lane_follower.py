@@ -361,8 +361,9 @@ class LaneFollowerNode(Node):
         # ══════════════════════════════════════════════════════════
         # PASS 1: Scan all rows — collect yellow and white separately
         # ══════════════════════════════════════════════════════════
-        yellow_rows = []   # list of (yellow_x, y)
-        white_rows = []    # list of (rightmost_white_x, y)
+        yellow_rows = []       # list of (yellow_x, y)
+        white_both_rows = []   # list of (left_x, right_x, y) — both edges visible
+        white_single_rows = [] # list of (rightmost_white_x, y) — one edge only
 
         for y in range(row_start, row_end, row_step):
             # ── Gather lane-mask pixels at this row ──────────
@@ -408,9 +409,15 @@ class LaneFollowerNode(Node):
             if yellow_x is not None:
                 yellow_rows.append((yellow_x, y))
 
-            if white_xs:
+            if len(white_xs) >= 2:
+                left_white_x = min(white_xs)
                 right_white_x = max(white_xs)
-                white_rows.append((right_white_x, y))
+                if (right_white_x - left_white_x) > lane_half_w:
+                    white_both_rows.append((left_white_x, right_white_x, y))
+                else:
+                    white_single_rows.append((right_white_x, y))
+            elif len(white_xs) == 1:
+                white_single_rows.append((white_xs[0], y))
 
         # ══════════════════════════════════════════════════════════
         # PASS 2: Decide GLOBALLY — yellow or white (never mix)
@@ -428,12 +435,19 @@ class LaneFollowerNode(Node):
                 center_x = yx + offset
                 center_points.append((int(center_x), y))
 
-        elif len(white_rows) > 0:
-            # ── NO YELLOW AT ALL → use right white line as boundary ──
+        elif len(white_both_rows) >= 3:
+            # ── NO YELLOW, BOTH WHITE EDGES → center between them ──
+            dominant_src = 'two_lanes'
+            for (lx, rx, y) in white_both_rows:
+                center_x = (lx + rx) / 2.0
+                center_points.append((int(center_x), y))
+
+        elif len(white_both_rows) > 0 or len(white_single_rows) > 0:
+            # ── NO YELLOW, SINGLE WHITE EDGE → stay left of rightmost ──
             dominant_src = 'white_line'
-            for (wx, y) in white_rows:
+            all_white = [(rx, y) for (_, rx, y) in white_both_rows] + white_single_rows
+            for (wx, y) in all_white:
                 depth_ratio = (y - row_start) / max(1, row_end - row_start)
-                # Larger offset: stay well to the left of the white edge
                 offset = lane_half_w * (0.3 + 0.4 * depth_ratio)
                 center_x = wx - offset
                 center_points.append((int(center_x), y))

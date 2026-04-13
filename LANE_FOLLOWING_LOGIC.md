@@ -75,15 +75,32 @@ After scanning all rows, the system makes a **single global decision**:
 | Priority | Condition | Steering Target | Speed |
 |----------|-----------|-----------------|-------|
 | **1 (best)** | Yellow found in **any** row | Drive to the right of yellow line (offset ≈ 35–70 px) | cruise (0.20 m/s) |
-| **2 (fallback)** | **No yellow at all** | Stay left of rightmost white line (offset ≈ 30–70 px) | cruise (0.20 m/s) |
-| **3 (emergency)** | No lane lines at all | Road-mask drivable area, right-biased (65%) | reduced (0.06 m/s) |
-| **4 (fail)** | Nothing visible for 1.5 s | Full stop | 0 m/s |
+| **2 (centering)** | **No yellow**, white on **both** sides (≥ 3 rows) | Center between left and right white edges | cruise (0.20 m/s) |
+| **3 (edge)** | **No yellow**, white on one side only | Stay left of rightmost white line (offset ≈ 30–70 px) | cruise (0.20 m/s) |
+| **4 (emergency)** | No lane lines at all | Road-mask drivable area, right-biased (65%) | reduced (0.06 m/s) |
+| **5 (fail)** | Nothing visible for 1.5 s | Full stop | 0 m/s |
 
 > **Critical design rule:** Yellow and white are **never mixed** in the same
 > frame.  If yellow is visible in even one scan row, **all white detections
 > are completely ignored**.  This prevents the white edge line from
 > pulling the vehicle off-track at corners where yellow curves but white
 > goes straight.
+
+### Both-White-Edges Centering (Priority 2)
+
+In sections without a yellow center line, if white lane markings are detected on
+**both** sides (left and right) in at least 3 scan rows — with a minimum gap of
+half a lane width between them — the vehicle drives centered between the two
+white edges. This is more reliable than the single-edge offset because it uses
+actual lane boundaries on both sides rather than guessing from one edge.
+
+The "both sides" check requires the leftmost and rightmost white clusters at a
+given scan row to be separated by more than `lane_width_px / 2` (100 px), which
+prevents two clusters on the same line from triggering centering mode. When fewer
+than 3 rows qualify, the system falls back to single-edge mode (priority 3).
+
+When yellow reappears in any scan row, the system immediately returns to
+yellow-priority mode (priority 1).
 
 ### Why Two-Pass?
 
